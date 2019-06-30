@@ -9,7 +9,7 @@
     </item>
 
     <item>
-        <bitmap android:src="@mipmap/logo" android:gravity="center"/>
+        <bitmap android:src="@mipmap/logo_lion" android:gravity="center"/>
     </item>
 
 

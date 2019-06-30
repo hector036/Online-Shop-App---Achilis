@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "346031585448",
+    "firebase_url": "https://achilis-a1646.firebaseio.com",
+    "project_id": "achilis-a1646",
+    "storage_bucket": "achilis-a1646.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346031585448:android:221757fde220d22e",
+        "android_client_info": {
+          "package_name": "com.example.achilis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346031585448-lju6v4ulg2qfg4l4skelo661t54cfsje.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbIWAkQ_JVIAJtrI-wM801BvJRckoGO7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346031585448-lju6v4ulg2qfg4l4skelo661t54cfsje.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

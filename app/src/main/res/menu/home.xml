@@ -5,20 +5,20 @@
         android:id="@+id/home_search_icon"
         android:orderInCategory="100"
         android:title="Search"
-        android:icon="@mipmap/search_f"
+        android:icon="@mipmap/search"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/home_notification_icon"
         android:orderInCategory="100"
         android:title="Notification"
-        android:icon="@mipmap/bell_f"
+        android:icon="@mipmap/bell"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/home_cart_icon"
         android:orderInCategory="100"
         android:title="Cart"
-        android:icon="@mipmap/cart_f"
+        android:icon="@mipmap/cart"
         app:showAsAction="always" />
 </menu>

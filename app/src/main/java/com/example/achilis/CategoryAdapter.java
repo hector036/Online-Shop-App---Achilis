@@ -1,5 +1,6 @@
 package com.example.achilis;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,7 +35,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         String icon = categoryModelList.get(pos).getCategoryIconLink();
         String name = categoryModelList.get(pos).getCategoryName();
 
-        viewHolder.setCategoryName(name);
+        viewHolder.setCategory(name,pos);
     }
 
     @Override
@@ -59,9 +60,19 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         }
 
-        private void setCategoryName(String name) {
+        private void setCategory(final String name, final int position) {
 
             categoryName.setText(name);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(position!=0){ Intent categoryIntent = new Intent(itemView.getContext(),CategoryActivity.class);
+                        categoryIntent.putExtra("CategoryName",name);
+                        itemView.getContext().startActivity(categoryIntent);}
+
+                }
+            });
         }
 
 

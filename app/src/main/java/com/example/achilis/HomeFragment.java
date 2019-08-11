@@ -110,6 +110,25 @@ public class HomeFragment extends Fragment {
 
         ////////////////Grid product layout /////////
 
+        ////////////////////////
+        RecyclerView testing = view.findViewById(R.id.testing);
+        LinearLayoutManager testingLayoutManager = new LinearLayoutManager(getContext());
+        testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        testing.setLayoutManager(testingLayoutManager);
+
+        List<HomePageModel> homePageModelList = new ArrayList<>();
+
+        homePageModelList.add(new HomePageModel(0,"Deals Of The Day",horizontalScrollProductModelList));
+        homePageModelList.add(new HomePageModel(1,"#Treding",horizontalScrollProductModelList));
+        homePageModelList.add(new HomePageModel(1,"#NewCollection",horizontalScrollProductModelList));
+
+
+        HomePageAdapter adapter = new HomePageAdapter(homePageModelList);
+        testing.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        ////////////////////////
+
 
 
 

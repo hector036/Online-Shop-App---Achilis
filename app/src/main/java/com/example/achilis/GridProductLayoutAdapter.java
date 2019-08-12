@@ -1,5 +1,9 @@
 package com.example.achilis;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +36,22 @@ public class GridProductLayoutAdapter extends BaseAdapter {
         return 0;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public View getView(int i, View convertView, ViewGroup parent) {
+    public View getView(int i, View convertView, final ViewGroup parent) {
        View view;
        if(convertView == null){
            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizontal_scroll_layout_item,null);
+          view.setElevation(0);
+          view.setBackgroundColor(Color.parseColor("#ffffff"));
+
+          view.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  Intent productDetailsIntent = new Intent(parent.getContext(),ProductDetailsActivity.class);
+                  parent.getContext().startActivity(productDetailsIntent);
+              }
+          });
            ImageView productImage = view.findViewById(R.id.horizontal_scroll_product_image);
            TextView productTitle = view.findViewById(R.id.horizontal_scroll_product_title);
            TextView productDes = view.findViewById(R.id.horizontal_scroll_product_description);

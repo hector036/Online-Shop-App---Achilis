@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#CE0000</color>
-    <color name="colorPrimaryDark">#CE0000</color>
-    <color name="colorAccent">#ffffff</color>
-    <color name="buttonColor">#9f0000</color>
-    <color name="colorHint">#99ffffff</color>
-    <color name="color_black">#000000</color>
-    <color name="redButtonDisabled">#50ffffff</color>
+  <color name="colorPrimary">#CE0000</color>
+  <color name="colorPrimaryDark">#CE0000</color>
+  <color name="colorAccent">#ffffff</color>
+  <color name="buttonColor">#9f0000</color>
+  <color name="colorHint">#99ffffff</color>
+  <color name="color_black">#000000</color>
+  <color name="redButtonDisabled">#50ffffff</color>
+  <color name="green">#00BB06</color>
+  <color name="recycler_view_bg">#DFDADA</color>
 </resources>

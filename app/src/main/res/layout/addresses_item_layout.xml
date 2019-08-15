@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
+    android:layout_marginBottom="1dp"
     android:background="@color/colorAccent"
     android:elevation="3dp"
     android:foreground="?attr/selectableItemBackground">
@@ -22,7 +21,6 @@
         android:text="Nayeem Khan"
         android:textColor="@color/color_black"
         android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/icon_view_myaddress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +33,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="address dummy"
-        android:textColor="@color/color_black"
+        android:textColor="#9A9B9B"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_myaddress" />
 
@@ -48,7 +47,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:text="Pincode"
-        android:textColor="@color/color_black"
+        android:textColor="#9A9B9B"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,9 +65,14 @@
         android:paddingRight="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/checkbox_on_background"
+        app:srcCompat="@mipmap/ic_check_24px"
+        android:backgroundTint="@color/green"
         android:paddingLeft="16sp" />
 
+    <!--
+       android:background="@drawable/rounded_back_ground_5_border"
+        android:backgroundTint="@color/recycler_view_bg"
+       -->
     <LinearLayout
         android:id="@+id/option_container_addresses_item"
         android:layout_width="wrap_content"
@@ -76,9 +80,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/rounded_back_ground_5_border"
-        android:backgroundTint="@color/recycler_view_bg"
-        android:elevation="3dp"
+
+        android:background="@color/brown_option_bg_color"
+        android:elevation="6dp"
         android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"

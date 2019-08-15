@@ -13,6 +13,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import static com.example.achilis.DeliveryActivity.SELECT_ADDRESS;
+import static com.example.achilis.HomeActivity.MANAGE_ADDRESS_FRAG;
+import static com.example.achilis.HomeActivity.refreshItemFrag;
 import static com.example.achilis.MyAccountFragment.MANAGE_ADDRESS;
 import static com.example.achilis.MyAddressActivity.refreshItem;
 
@@ -74,7 +76,7 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.View
 
             if (mode == SELECT_ADDRESS) {
 
-                icon.setImageResource(android.R.drawable.checkbox_on_background);
+                icon.setImageResource(R.mipmap.ic_check_24px);
                 if (s) {
                     icon.setVisibility(View.VISIBLE);
                     preSelectedPosition_SELECT_MODE = position;
@@ -110,6 +112,25 @@ public class AddressesAdapter extends RecyclerView.Adapter<AddressesAdapter.View
                     @Override
                     public void onClick(View view) {
                         refreshItem(preSelectedPosition_MANGE_MODE,preSelectedPosition_MANGE_MODE);
+                        preSelectedPosition_MANGE_MODE=-1;
+                    }
+                });
+
+            }else if (mode == MANAGE_ADDRESS_FRAG) {
+                optionContainer.setVisibility(View.GONE);
+                icon.setImageResource(R.mipmap.ic_more_vert_24px);
+                icon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        optionContainer.setVisibility(View.VISIBLE);
+                        refreshItemFrag(preSelectedPosition_MANGE_MODE,preSelectedPosition_MANGE_MODE);
+                        preSelectedPosition_MANGE_MODE = position;
+                    }
+                });
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        refreshItemFrag(preSelectedPosition_MANGE_MODE,preSelectedPosition_MANGE_MODE);
                         preSelectedPosition_MANGE_MODE=-1;
                     }
                 });

@@ -3,9 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="8dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="6dp"
+
     android:paddingBottom="8dp"
-    android:elevation="3dp"
+    android:elevation="8dp"
+    android:background="@drawable/rounded_back_ground_5_border"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -15,8 +20,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Deals Of The Day"
-        android:textColor="#000000"
+        android:text="Deals Of The Day!"
+        android:textColor="#FFAC06"
+        android:textSize="16sp"
+        android:textStyle="bold"
+
         app:layout_constraintBottom_toBottomOf="@+id/horizontal_scroll_layout_title_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/horizontal_scroll_layout_title_button" />
@@ -24,14 +32,16 @@
     <Button
         android:id="@+id/horizontal_scroll_layout_title_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="View All"
-        android:textSize="12sp"
+        android:layout_height="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/rounded_back_ground_3_border"
         android:backgroundTint="@color/colorPrimary"
+        android:text="View All"
         android:textColor="@color/colorAccent"
+        android:textSize="12sp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

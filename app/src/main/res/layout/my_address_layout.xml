@@ -43,7 +43,7 @@
         android:layout_marginTop="16dp"
         android:text="Nayeem Khan"
         android:textColor="@color/color_black"
-        android:textStyle="bold"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
@@ -57,7 +57,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Address Dummy"
-        android:textColor="@color/color_black"
+        android:textColor="@color/brown_text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/address_full_name_profile" />
@@ -71,10 +71,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:text="Pincode"
-        android:textColor="@color/color_black"
+        android:textColor="@color/brown_text_color"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/address_profile" />
+
+
 </android.support.constraint.ConstraintLayout>

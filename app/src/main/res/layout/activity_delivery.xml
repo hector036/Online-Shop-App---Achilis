@@ -89,8 +89,8 @@
             android:backgroundTint="@color/colorPrimary"
             android:text="Continue"
             android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+
+           android:textAllCaps="false" />
 
 
     </LinearLayout>

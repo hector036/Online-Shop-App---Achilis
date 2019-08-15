@@ -8,7 +8,7 @@
     tools:context=".MyAddressActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout6"
+        android:id="@+id/app_bar_my_addresses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
@@ -35,7 +35,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout6">
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_my_addresses">
 
         <TextView
             android:id="@+id/textView23"
@@ -69,7 +69,7 @@
         android:id="@+id/addresses_recyclerview_myaddress"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:background="@color/recycler_view_bg"
         app:layout_constraintBottom_toTopOf="@+id/deliver_here_button"
@@ -81,12 +81,12 @@
         android:id="@+id/deliver_here_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Deliver hre"
+        android:text="Deliver here"
         android:textAllCaps="false"
-        android:textStyle="bold"
+
         android:background="@color/colorPrimary"
         android:textColor="@color/colorAccent"
-        android:textSize="16sp"
+
         android:stateListAnimator="@null"
         android:elevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"

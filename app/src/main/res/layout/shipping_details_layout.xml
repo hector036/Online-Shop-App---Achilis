@@ -16,8 +16,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="SHIPPING DETAILS"
+        android:text="Shipping Details"
         android:textStyle="bold"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,8 +41,7 @@
         android:layout_marginTop="16dp"
         android:text="Nayeem khan"
         android:textColor="@color/color_black"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider10" />
 
@@ -53,7 +53,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="Shipping Adress"
-        android:textColor="@color/color_black"
+        android:textSize="12sp"
+        android:textColor="@color/brown_text_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/full_name_order_details" />
 
@@ -66,25 +67,27 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:text="Pincode"
-        android:textColor="@color/color_black"
+        android:textSize="12sp"
+
+        android:textColor="@color/brown_text_color"
         app:layout_constraintBottom_toTopOf="@+id/change_or_add_address_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/address_order_details" />
 
     <Button
         android:id="@+id/change_or_add_address_btn"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorAccent"
+        android:stateListAnimator="@null"
         android:text="Change or add new address"
         android:textAllCaps="false"
-        android:textColor="@color/colorAccent"
-
+        android:textColor="@color/colorPrimary"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

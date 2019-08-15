@@ -84,7 +84,10 @@
         app:srcCompat="@drawable/selected_dot" />
 
     <!--progress green-->
-    <!--  android:progressTint="@color/green"-->
+    <!--  android:progressTint="@color/green"
+    //another
+    android:progressBackgroundTint="@color/recycler_view_bg"
+    -->
     <ProgressBar
         android:id="@+id/ordered_packed_grogrees"
         style="?android:attr/progressBarStyleHorizontal"
@@ -94,7 +97,7 @@
         android:layout_marginLeft="9dp"
         android:layout_marginTop="8dp"
         android:progress="100"
-        android:progressBackgroundTint="@color/recycler_view_bg"
+        android:progressTint="@color/recycler_view_bg"
         android:rotation="90"
         android:transformPivotX="0dp"
         app:layout_constraintStart_toStartOf="@+id/order_dot_details_order"
@@ -122,7 +125,7 @@
         android:layout_marginTop="8dp"
         android:progress="100"
 
-        android:progressBackgroundTint="@color/recycler_view_bg"
+        android:progressTint="@color/recycler_view_bg"
         android:rotation="90"
         android:transformPivotX="0dp"
         app:layout_constraintStart_toStartOf="@+id/packed_dot_details_order"
@@ -150,7 +153,7 @@
         android:layout_marginTop="8dp"
         android:progress="100"
 
-        android:progressBackgroundTint="@color/recycler_view_bg"
+        android:progressTint="@color/recycler_view_bg"
         android:rotation="90"
         android:transformPivotX="0dp"
         app:layout_constraintStart_toStartOf="@+id/shipping_dot_details_order"

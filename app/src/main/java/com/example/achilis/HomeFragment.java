@@ -71,15 +71,15 @@ public class HomeFragment extends Fragment {
 
         List<HorizontalScrollProductModel> horizontalScrollProductModelList = new ArrayList<>();
 
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"RedMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"GreenMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"RedMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"GreenMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"RedMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"GreenMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"RedMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"GreenMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"GreenMi","Description blank","100 tk"));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"RedMi","Description blank","100 tk"));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"GreenMi","Description blank","100 tk"));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"RedMi","Description blank","100 tk"));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"GreenMi","Description blank","100 tk"));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"RedMi","Description blank","100 tk"));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"GreenMi","Description blank","100 tk"));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"RedMi","Description blank","100 tk"));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"GreenMi","Description blank","100 tk"));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"GreenMi","Description blank","100 tk"));
 
         ///////////////Horizontal product view
 
@@ -95,6 +95,7 @@ public class HomeFragment extends Fragment {
         homePageModelList.add(new HomePageModel(0,"Deals Of The Day",horizontalScrollProductModelList));
         homePageModelList.add(new HomePageModel(1,"#Treding",horizontalScrollProductModelList));
         homePageModelList.add(new HomePageModel(1,"#NewCollection",horizontalScrollProductModelList));
+        homePageModelList.add(new HomePageModel(1,"#OldCollection",horizontalScrollProductModelList));
 
 
         HomePageAdapter adapter = new HomePageAdapter(homePageModelList);

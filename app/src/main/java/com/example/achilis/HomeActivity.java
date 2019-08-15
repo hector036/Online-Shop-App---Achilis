@@ -1,5 +1,6 @@
 package com.example.achilis;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,22 +19,33 @@ import android.view.Menu;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.time.ZoneOffset;
+
+import static com.example.achilis.MyAccountFragment.MANAGE_ADDRESS;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static AddressesAdapter addressesAdapterFrag;
+
+
+    public static final int MANAGE_ADDRESS_FRAG=3;
 
     private static final int HOME_FRAGEMENT = 0;
     private static final int CART_FRAGEMENT = 1;
     private static final int ORDER_FRAGEMENT = 2;
     private static final int WISHLIST_FRAGEMENT = 3;
-    private static final int ACCOUNT_FRAGEMENT = 3;
+    private static final int ACCOUNT_FRAGEMENT = 4;
+    private static final int MYADDRESSES_FRAGEMENT = 5;
 
     private FrameLayout parentFrameLayout;
     private NavigationView navigationView;
     private ImageView actionBarLogo;
 
-    private static int currentFragement = -1;
+    private static int currentFragement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +66,7 @@ public class HomeActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
 
         parentFrameLayout = findViewById(R.id.home_framelayout);
+        currentFragement= -1;
         setFragment(new HomeFragment(), HOME_FRAGEMENT);
     }
 
@@ -147,11 +160,22 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_myaccount) {
             goToFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGEMENT);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_signout) {
+            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            if(firebaseUser != null){
+                FirebaseAuth.getInstance().signOut();
+                Intent loginIntent = new Intent(HomeActivity.this,RegisterActivity.class);
+                startActivity(loginIntent);
+                finish();
+            }
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_myaddressess) {
+            goToFragment("My Addresses", new MyAddressesTestFragment(), MYADDRESSES_FRAGEMENT);
 
-        } else if (id == R.id.nav_myorder) {
+        }else if (id == R.id.nav_setting) {
+
+        }
+        else if (id == R.id.nav_myorder) {
             goToFragment("My Order", new MyOrderFragment(), ORDER_FRAGEMENT);
 
         }
@@ -169,5 +193,13 @@ public class HomeActivity extends AppCompatActivity
             fragmentTransaction.replace(parentFrameLayout.getId(), fragment);
             fragmentTransaction.commit();
         }
+
+
+    }
+
+    public static void refreshItemFrag(int deselect,int select){
+
+        addressesAdapterFrag.notifyItemChanged(deselect);
+        addressesAdapterFrag.notifyItemChanged(select);
     }
 }

@@ -3,23 +3,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/rounded_back_ground_5_border"
+    android:elevation="8dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="6dp"
 
-    android:elevation="3dp"
-    android:layout_margin="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <Button
         android:id="@+id/grid_product_layout_viewall_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="View All"
-        android:textSize="12sp"
+        android:layout_height="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/rounded_back_ground_3_border"
         android:backgroundTint="@color/colorPrimary"
+        android:text="View All"
         android:textColor="@color/colorAccent"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +46,7 @@
         android:id="@+id/grid_product_layout_grid_view"
         android:layout_width="0dp"
         android:layout_height="350dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
 
         android:layout_marginBottom="8dp"
         android:background="#E9E7E7"

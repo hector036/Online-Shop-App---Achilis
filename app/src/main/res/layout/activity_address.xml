@@ -150,10 +150,12 @@
             <Button
                 android:id="@+id/save_btn_address"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="48dp"
                 android:layout_margin="16dp"
+                android:background="@drawable/rounded_back_ground_3_border"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="Save"
+                android:textAllCaps="false"
                 android:textColor="@color/colorAccent" />
         </LinearLayout>
     </ScrollView>

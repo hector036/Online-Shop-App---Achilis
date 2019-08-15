@@ -27,6 +27,7 @@ public class HomeActivity extends AppCompatActivity
     private static final int CART_FRAGEMENT = 1;
     private static final int ORDER_FRAGEMENT = 2;
     private static final int WISHLIST_FRAGEMENT = 3;
+    private static final int ACCOUNT_FRAGEMENT = 3;
 
     private FrameLayout parentFrameLayout;
     private NavigationView navigationView;
@@ -144,6 +145,7 @@ public class HomeActivity extends AppCompatActivity
             goToFragment("My Wish", new MyWishListFragment(), WISHLIST_FRAGEMENT);
 
         } else if (id == R.id.nav_myaccount) {
+            goToFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGEMENT);
 
         } else if (id == R.id.nav_share) {
 

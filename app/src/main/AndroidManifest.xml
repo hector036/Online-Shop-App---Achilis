@@ -11,7 +11,12 @@
         android:roundIcon="@mipmap/logo_cp_a_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderDetailsActivity"></activity>
+        <activity android:name=".MyAddressActivity"></activity>
+        <activity
+            android:name=".AddressActivity"
+            android:theme="@style/RedThemeAddress" />
+        <activity android:name=".DeliveryActivity" />
+        <activity android:name=".OrderDetailsActivity" />
         <activity android:name=".ProductDetailsActivity" />
         <activity android:name=".CategoryActivity" />
         <activity

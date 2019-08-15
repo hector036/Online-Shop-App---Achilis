@@ -16,12 +16,22 @@
         <item name="android:windowBackground">@drawable/splash_activity_background</item>
     </style>
 
+    <style name="RedThemeAddress" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        
+    </style>
+
     <style name="dialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <!-- Customize your theme here. -->
         <item name="colorAccent">#CE0000</item>
         <item name="android:textSize">16sp</item>
 
     </style>
+
+
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

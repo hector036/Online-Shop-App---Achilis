@@ -41,15 +41,15 @@ public class MyWishListFragment extends Fragment {
 
         List<WishListModel> wishListModelList = new ArrayList<>();
 
-        wishListModelList.add(new WishListModel(R.mipmap.image_5,"Pixel 2XL (Black)",1,"3",124,"Tk. 49999/-","TTk. 5999/-","Cash On Delivery"));
+       /* wishListModelList.add(new WishListModel(R.mipmap.image_5,"Pixel 2XL (Black)",1,"3",124,"Tk. 49999/-","TTk. 5999/-","Cash On Delivery"));
         wishListModelList.add(new WishListModel(R.mipmap.image_5,"Pixel 2XL (Black)",5,"3.6",124,"Tk. 49999/-","TTk. 5999/-","Cash On Delivery"));
         wishListModelList.add(new WishListModel(R.mipmap.image_5,"Pixel 2XL (Black)",1,"3",124,"Tk. 49999/-","TTk. 5999/-","Cash On Delivery"));
         wishListModelList.add(new WishListModel(R.mipmap.image_5,"Pixel 2XL (Black)",0,"3",14,"Tk. 49999/-","TTk. 5999/-","Cash On Delivery"));
         wishListModelList.add(new WishListModel(R.mipmap.image_5,"Pixel 2XL (Black)",1,"3",12,"Tk. 49999/-","TTk. 5999/-","Cash On Delivery"));
         wishListModelList.add(new WishListModel(R.mipmap.image_5,"Pixel 2XL (Black)",1,"3",124,"Tk. 49999/-","TTk. 5999/-","Cash On Delivery"));
         wishListModelList.add(new WishListModel(R.mipmap.image_5,"Pixel 2XL (Black)",0,"4.5",124,"Tk. 49999/-","TTk. 5999/-","Cash On Delivery"));
-
-        WishListAdapter wishListAdapter = new WishListAdapter(wishListModelList);
+*/
+        WishListAdapter wishListAdapter = new WishListAdapter(wishListModelList,true);
         wishlistRecyclerview.setAdapter(wishListAdapter);
         wishListAdapter.notifyDataSetChanged();
         return view;

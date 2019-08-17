@@ -2,16 +2,25 @@ package com.example.achilis;
 
 public class HorizontalScrollProductModel {
 
-    private int productImage;
+    private String productImage;
+    private String productID;
     private String productTitle;
     private String productDes;
     private String productPrice;
 
-    public int getProductImage() {
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
+
+    public String getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(int productIamge) {
+    public void setProductImage(String productIamge) {
         this.productImage = productIamge;
     }
 
@@ -39,7 +48,8 @@ public class HorizontalScrollProductModel {
         this.productPrice = productPrice;
     }
 
-    public HorizontalScrollProductModel(int productImage, String productTitle, String productDes, String productPrice) {
+    public HorizontalScrollProductModel(String productID,String productImage, String productTitle, String productDes, String productPrice) {
+        this.productID = productID;
         this.productImage = productImage;
         this.productTitle = productTitle;
         this.productDes = productDes;

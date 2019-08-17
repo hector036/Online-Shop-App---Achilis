@@ -11,9 +11,14 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.achilis.DBqueries.lists;
+import static com.example.achilis.DBqueries.loadFragmentData;
+import static com.example.achilis.DBqueries.loadedCategoriesName;
+
 public class CategoryActivity extends AppCompatActivity {
 
     private RecyclerView categoryRecyclerView;
+    private HomePageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,39 +33,34 @@ public class CategoryActivity extends AppCompatActivity {
 
         categoryRecyclerView = findViewById(R.id.category_activity_recycler_view);
 
-        List<HorizontalScrollProductModel> horizontalScrollProductModelList = new ArrayList<>();
-
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"RedMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"GreenMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"RedMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"GreenMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"RedMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"GreenMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"RedMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"GreenMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.order_black,"GreenMi","Description blank","100 tk"));
-
-        ///////////////Horizontal product view
-
-
-        //////////////////////// Multiple Recycler View ///////////
 
         LinearLayoutManager testingLayoutManager = new LinearLayoutManager(this);
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         categoryRecyclerView.setLayoutManager(testingLayoutManager);
 
-        List<HomePageModel> homePageModelList = new ArrayList<>();
-
-        homePageModelList.add(new HomePageModel(0,"Deals Of The Day",horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(1,"#Treding",horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(1,"#NewCollection",horizontalScrollProductModelList));
 
 
-        HomePageAdapter adapter = new HomePageAdapter(homePageModelList);
+        int listPosition=0;
+        for(int x = 0; x<loadedCategoriesName.size();x++){
+            if(loadedCategoriesName.get(x).equals(title.toUpperCase())){
+                listPosition=x;
+            }
+        }
+
+        if(listPosition==0){
+            loadedCategoriesName.add(title.toUpperCase());
+            lists.add(new ArrayList<HomePageModel>());
+            adapter = new HomePageAdapter(lists.get(loadedCategoriesName.size()-1));
+            ////******
+            loadFragmentData(adapter, this,loadedCategoriesName.size()-1,title);
+        }else {
+            adapter = new HomePageAdapter(lists.get(listPosition));
+
+        }
+
         categoryRecyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        //////////////////////// Multiple Recycler View ///////////
     }
 
     @Override

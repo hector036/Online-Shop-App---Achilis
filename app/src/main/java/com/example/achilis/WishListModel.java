@@ -1,16 +1,16 @@
 package com.example.achilis;
 
 public class WishListModel {
-    private int productImage;
+    private String productImage;
     private String prouctTitle;
-    private int freeCoupon;
+    private long freeCoupon;
     private String rating;
-    private int totalRating;
+    private long totalRating;
     private String productPrice;
     private String cuttedPrice;
-    private String paymentMethods;
+    private boolean COD;
 
-    public WishListModel(int productImage, String prouctTitle, int freeCoupon, String rating, int totalRating, String productPrice, String cuttedPrice, String paymentMethods) {
+    public WishListModel(String productImage, String prouctTitle, long freeCoupon, String rating, long totalRating, String productPrice, String cuttedPrice, boolean COD) {
         this.productImage = productImage;
         this.prouctTitle = prouctTitle;
         this.freeCoupon = freeCoupon;
@@ -18,14 +18,14 @@ public class WishListModel {
         this.totalRating = totalRating;
         this.productPrice = productPrice;
         this.cuttedPrice = cuttedPrice;
-        this.paymentMethods = paymentMethods;
+        this.COD = COD;
     }
 
-    public int getProductImage() {
+    public String getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(int productImage) {
+    public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
 
@@ -37,11 +37,11 @@ public class WishListModel {
         this.prouctTitle = prouctTitle;
     }
 
-    public int getFreeCoupon() {
+    public long getFreeCoupon() {
         return freeCoupon;
     }
 
-    public void setFreeCoupon(int freeCoupon) {
+    public void setFreeCoupon(long freeCoupon) {
         this.freeCoupon = freeCoupon;
     }
 
@@ -53,11 +53,11 @@ public class WishListModel {
         this.rating = rating;
     }
 
-    public int getTotalRating() {
+    public long getTotalRating() {
         return totalRating;
     }
 
-    public void setTotalRating(int totalRating) {
+    public void setTotalRating(long totalRating) {
         this.totalRating = totalRating;
     }
 
@@ -77,11 +77,11 @@ public class WishListModel {
         this.cuttedPrice = cuttedPrice;
     }
 
-    public String getPaymentMethods() {
-        return paymentMethods;
+    public boolean isCOD() {
+        return COD;
     }
 
-    public void setPaymentMethods(String paymentMethods) {
-        this.paymentMethods = paymentMethods;
+    public void setCOD(boolean COD) {
+        this.COD = COD;
     }
 }

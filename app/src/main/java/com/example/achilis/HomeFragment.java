@@ -1,7 +1,11 @@
 package com.example.achilis;
 
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,10 +14,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.achilis.DBqueries.categoryModelList;
+import static com.example.achilis.DBqueries.firebaseFirestore;
+
+import static com.example.achilis.DBqueries.lists;
+import static com.example.achilis.DBqueries.loadCategories;
+import static com.example.achilis.DBqueries.loadFragmentData;
+import static com.example.achilis.DBqueries.loadedCategoriesName;
 
 
 /**
@@ -26,6 +47,8 @@ public class HomeFragment extends Fragment {
     private CategoryAdapter categoryAdapter;
 
 
+    private HomePageAdapter adapter;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -34,6 +57,7 @@ public class HomeFragment extends Fragment {
     private TextView horizontalLayoutTitle;
     private Button horizontalViewAllButton;
     private RecyclerView horizontalRecyclerView;
+    private ImageView noInternetConnection;
 
     ///////////////horizontal product layout
 
@@ -43,66 +67,55 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        categoryRecyclerView =  view.findViewById(R.id.categories_reclycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        categoryRecyclerView.setLayoutManager(layoutManager);
+        noInternetConnection = view.findViewById(R.id.no_internet_connection);
 
 
-        List<CategoryModel> categoryModelList = new ArrayList<CategoryModel>();
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected() == true) {
+            noInternetConnection.setVisibility(View.GONE);
 
-        categoryModelList.add(new CategoryModel("link","Home"));
-        categoryModelList.add(new CategoryModel("link","Food"));
-        categoryModelList.add(new CategoryModel("link","Fashion"));
-        categoryModelList.add(new CategoryModel("link","Phones"));
-        categoryModelList.add(new CategoryModel("link","Tablets"));
-        categoryModelList.add(new CategoryModel("link","Glosaries"));
-        categoryModelList.add(new CategoryModel("link","Electronics"));
-        categoryModelList.add(new CategoryModel("link","Services"));
-        categoryModelList.add(new CategoryModel("link","More"));
+            categoryRecyclerView = view.findViewById(R.id.categories_reclycler_view);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            categoryRecyclerView.setLayoutManager(layoutManager);
 
-        categoryAdapter = new CategoryAdapter(categoryModelList);
-        categoryRecyclerView.setAdapter(categoryAdapter);
-        categoryAdapter.notifyDataSetChanged();
+            categoryAdapter = new CategoryAdapter(categoryModelList);
+            categoryRecyclerView.setAdapter(categoryAdapter);
 
+            if (categoryModelList.size() == 0) {
+                loadCategories(categoryAdapter, getContext());
+            } else {
+                categoryAdapter.notifyDataSetChanged();
+            }
 
-        ///////////////Horizontal product view
-
-        List<HorizontalScrollProductModel> horizontalScrollProductModelList = new ArrayList<>();
-
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"RedMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"GreenMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"RedMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"GreenMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"RedMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"GreenMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"RedMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"GreenMi","Description blank","100 tk"));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel(R.mipmap.image_5,"GreenMi","Description blank","100 tk"));
-
-        ///////////////Horizontal product view
+            RecyclerView testing = view.findViewById(R.id.testing);
+            LinearLayoutManager testingLayoutManager = new LinearLayoutManager(getContext());
+            testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            testing.setLayoutManager(testingLayoutManager);
 
 
-        //////////////////////// Multiple Recycler View ///////////
-        RecyclerView testing = view.findViewById(R.id.testing);
-        LinearLayoutManager testingLayoutManager = new LinearLayoutManager(getContext());
-        testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        testing.setLayoutManager(testingLayoutManager);
-
-        List<HomePageModel> homePageModelList = new ArrayList<>();
-
-        homePageModelList.add(new HomePageModel(0,"Deals Of The Day",horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(1,"#Treding",horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(1,"#NewCollection",horizontalScrollProductModelList));
-        homePageModelList.add(new HomePageModel(1,"#OldCollection",horizontalScrollProductModelList));
 
 
-        HomePageAdapter adapter = new HomePageAdapter(homePageModelList);
-        testing.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+            if (lists.size() == 0) {
+                loadedCategoriesName.add("HOME");
+                lists.add(new ArrayList<HomePageModel>());
+                adapter = new HomePageAdapter(lists.get(0));
+                loadFragmentData(adapter, getContext(),0,"Home");
+            } else {
+                adapter = new HomePageAdapter(lists.get(0));
+                adapter.notifyDataSetChanged();
+            }
 
-        //////////////////////// Multiple Recycler View ///////////
+            testing.setAdapter(adapter);
+
+
+        } else {
+
+            Glide.with(this).load(R.mipmap.no_internet_connection).into(noInternetConnection);
+            noInternetConnection.setVisibility(View.VISIBLE);
+        }
+
 
         return view;
     }

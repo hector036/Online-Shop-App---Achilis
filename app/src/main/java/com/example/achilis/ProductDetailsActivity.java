@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.achilis.HomeActivity.showcart;
+
 public class ProductDetailsActivity extends AppCompatActivity {
 
     private ViewPager productImageViewPager;
@@ -156,8 +158,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
             finish();
             return true;
         }else if(id == R.id.home_cart_icon){
-
-
+            Intent cartIntent = new Intent(ProductDetailsActivity.this,HomeActivity.class);
+            showcart = true;
+            startActivity(cartIntent);
             return true;
         }else if(id ==  R.id.home_search_icon){
 

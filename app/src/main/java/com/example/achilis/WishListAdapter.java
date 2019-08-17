@@ -1,5 +1,6 @@
 package com.example.achilis;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
@@ -11,14 +12,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHolder> {
 
    private List<WishListModel> wishListModelList;
+   private Boolean wishlist;
 
-    public WishListAdapter(List<WishListModel> wishListModelList) {
+    public WishListAdapter(List<WishListModel> wishListModelList, boolean wishlist) {
         this.wishListModelList = wishListModelList;
+        this.wishlist = wishlist;
     }
 
     @NonNull
@@ -30,14 +36,14 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull WishListAdapter.ViewHolder viewHolder, int i) {
-        int resoure = wishListModelList.get(i).getProductImage();
+        String resoure = wishListModelList.get(i).getProductImage();
         String title = wishListModelList.get(i).getProuctTitle();
-        int freeCoupon = wishListModelList.get(i).getFreeCoupon();
+        long freeCoupon = wishListModelList.get(i).getFreeCoupon();
         String rating = wishListModelList.get(i).getRating();
-        int totalrating = wishListModelList.get(i).getTotalRating();
+        long totalrating = wishListModelList.get(i).getTotalRating();
         String productPrice = wishListModelList.get(i).getProductPrice();
         String cuttedPrice = wishListModelList.get(i).getCuttedPrice();
-        String paymentMethod = wishListModelList.get(i).getPaymentMethods();
+        boolean paymentMethod = wishListModelList.get(i).isCOD();
         viewHolder.setData(resoure,title,freeCoupon,rating,totalrating,productPrice,cuttedPrice,paymentMethod);
 
     }
@@ -77,18 +83,21 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
             deleteBtn = itemView.findViewById(R.id.delete_button_wishlist);
         }
 
-        private void setData(int r, String t, int couponNo,String rate,int totalRate,String price,String cprice, String pmethod){
+        private void setData(String iconUrl, String t, long couponNo,String rate,long totalRate,String price,String cprice, boolean pmethod){
 
-            productImage.setImageResource(r);
+           //productImage.setImageResource(r);
+
+            Glide.with(itemView.getContext()).load(iconUrl).apply(new RequestOptions().placeholder(R.mipmap.home_black)).into(productImage);
+
             productTitle.setText(t);
 
             if (couponNo > 0) {
                 freeCoupon.setVisibility(View.VISIBLE);
                 couponIcon.setVisibility(View.VISIBLE);
                 if (couponNo == 1) {
-                    freeCoupon.setText("free " + couponNo + " coupon");
+                    freeCoupon.setText("Free " + couponNo + " coupon");
                 } else {
-                    freeCoupon.setText("free " + couponNo + " coupons");
+                    freeCoupon.setText("Free " + couponNo + " coupons");
                 }
 
             } else {
@@ -97,11 +106,20 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
             }
 
             rating.setText(rate);
-            totalRating.setText(totalRate+"(ratings)");
-            productPrice.setText(price);
-            cuttedPrice.setText(cprice);
-            paymentMethod.setText(pmethod);
+            totalRating.setText("("+totalRate+") ratings");
+            productPrice.setText("Tk. "+price+"/-");
+            cuttedPrice.setText("Tk. "+cprice+"/-");
+            if(pmethod){
+                paymentMethod.setVisibility(View.VISIBLE);
+            }else {
+                paymentMethod.setVisibility(View.INVISIBLE);
+            }
 
+            if(wishlist){
+                deleteBtn.setVisibility(View.VISIBLE);
+            }else{
+                deleteBtn.setVisibility(View.GONE);
+            }
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -109,6 +127,15 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
 
                 }
             });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent productDetailsIntent = new Intent(itemView.getContext(),ProductDetailsActivity.class);
+                    itemView.getContext().startActivity(productDetailsIntent);
+                }
+            });
+
 
         }
     }

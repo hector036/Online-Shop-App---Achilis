@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/rounded_back_ground_5_border"
-    android:elevation="8dp"
-    android:layout_marginTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
+    android:layout_marginTop="10dp"
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="6dp"
 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:background="@drawable/rounded_back_ground_5_border"
+    android:elevation="8dp">
 
     <Button
         android:id="@+id/grid_product_layout_viewall_button"
@@ -35,26 +34,60 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="Title"
-        android:textSize="16sp"
         android:textColor="#000000"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/grid_product_layout_viewall_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/grid_product_layout_viewall_button" />
 
-    <GridView
-        android:id="@+id/grid_product_layout_grid_view"
+    <android.support.v7.widget.GridLayout
+        android:id="@+id/grid_layout_"
         android:layout_width="0dp"
-        android:layout_height="350dp"
-        android:layout_marginTop="12dp"
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="#E9E7E7"
-        android:horizontalSpacing="1dp"
-        android:numColumns="2"
-        android:verticalSpacing="1dp"
+        app:columnCount="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grid_product_layout_viewall_button" />
+        app:layout_constraintTop_toBottomOf="@+id/grid_product_layout_viewall_button">
+
+        <include
+            layout="@layout/horizontal_scroll_layout_item"
+            app:layout_columnWeight="1" />
+
+        <include
+            layout="@layout/horizontal_scroll_layout_item"
+            app:layout_columnWeight="1" />
+
+        <include
+            layout="@layout/horizontal_scroll_layout_item"
+            app:layout_columnWeight="1" />
+
+        <include
+            layout="@layout/horizontal_scroll_layout_item"
+            app:layout_columnWeight="1" />
+    </android.support.v7.widget.GridLayout>
+
+    <View
+        android:id="@+id/divider11"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/recycler_view_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/grid_layout_"
+        app:layout_constraintEnd_toEndOf="@+id/grid_layout_"
+        app:layout_constraintStart_toStartOf="@+id/grid_layout_"
+        app:layout_constraintTop_toTopOf="@+id/grid_layout_" />
+
+    <View
+        android:id="@+id/divider12"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/recycler_view_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/grid_layout_"
+        app:layout_constraintStart_toStartOf="@+id/grid_layout_"
+        app:layout_constraintTop_toTopOf="@+id/grid_layout_" />
+
 </android.support.constraint.ConstraintLayout>

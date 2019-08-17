@@ -1,6 +1,9 @@
 package com.example.achilis;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +22,7 @@ import android.view.Menu;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -32,7 +36,7 @@ public class HomeActivity extends AppCompatActivity
     public static AddressesAdapter addressesAdapterFrag;
 
 
-    public static final int MANAGE_ADDRESS_FRAG=3;
+    public static final int MANAGE_ADDRESS_FRAG = 3;
 
     private static final int HOME_FRAGEMENT = 0;
     private static final int CART_FRAGEMENT = 1;
@@ -40,15 +44,17 @@ public class HomeActivity extends AppCompatActivity
     private static final int WISHLIST_FRAGEMENT = 3;
     private static final int ACCOUNT_FRAGEMENT = 4;
     private static final int MYADDRESSES_FRAGEMENT = 5;
+    public static Boolean showcart = false;
 
     private FrameLayout parentFrameLayout;
     private NavigationView navigationView;
     private ImageView actionBarLogo;
 
-    private static int currentFragement;
+    private int currentFragement = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //currentFragement = -1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -58,16 +64,27 @@ public class HomeActivity extends AppCompatActivity
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+
+
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
         parentFrameLayout = findViewById(R.id.home_framelayout);
-        currentFragement= -1;
-        setFragment(new HomeFragment(), HOME_FRAGEMENT);
+
+        if (showcart) {
+            drawer.setDrawerLockMode(1);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            goToFragment("My Cart", new MyCartFragment(), -2);
+        } else {
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+            setFragment(new HomeFragment(), HOME_FRAGEMENT);
+        }
+
+
+
     }
 
     @Override
@@ -78,13 +95,19 @@ public class HomeActivity extends AppCompatActivity
         } else {
 
             if (currentFragement == HOME_FRAGEMENT) {
+                currentFragement = -1;
                 super.onBackPressed();
             } else {
-                actionBarLogo.setVisibility(View.VISIBLE);
-                invalidateOptionsMenu();
-                setFragment(new HomeFragment(), HOME_FRAGEMENT);
-                navigationView.getMenu().getItem(0).setChecked(true);
 
+                if (showcart) {
+                    showcart = false;
+                    finish();
+                } else {
+                    actionBarLogo.setVisibility(View.VISIBLE);
+                    invalidateOptionsMenu();
+                    setFragment(new HomeFragment(), HOME_FRAGEMENT);
+                    navigationView.getMenu().getItem(0).setChecked(true);
+                }
             }
         }
     }
@@ -120,6 +143,10 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.home_search_icon) {
 
 
+            return true;
+        } else if (id == android.R.id.home) {
+            showcart = false;
+            finish();
             return true;
         }
 
@@ -158,13 +185,13 @@ public class HomeActivity extends AppCompatActivity
             goToFragment("My Wish", new MyWishListFragment(), WISHLIST_FRAGEMENT);
 
         } else if (id == R.id.nav_myaccount) {
-            goToFragment("My Account",new MyAccountFragment(),ACCOUNT_FRAGEMENT);
+            goToFragment("My Account", new MyAccountFragment(), ACCOUNT_FRAGEMENT);
 
         } else if (id == R.id.nav_signout) {
             FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-            if(firebaseUser != null){
+            if (firebaseUser != null) {
                 FirebaseAuth.getInstance().signOut();
-                Intent loginIntent = new Intent(HomeActivity.this,RegisterActivity.class);
+                Intent loginIntent = new Intent(HomeActivity.this, RegisterActivity.class);
                 startActivity(loginIntent);
                 finish();
             }
@@ -172,10 +199,9 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_myaddressess) {
             goToFragment("My Addresses", new MyAddressesTestFragment(), MYADDRESSES_FRAGEMENT);
 
-        }else if (id == R.id.nav_setting) {
+        } else if (id == R.id.nav_setting) {
 
-        }
-        else if (id == R.id.nav_myorder) {
+        } else if (id == R.id.nav_myorder) {
             goToFragment("My Order", new MyOrderFragment(), ORDER_FRAGEMENT);
 
         }
@@ -197,7 +223,7 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
-    public static void refreshItemFrag(int deselect,int select){
+    public static void refreshItemFrag(int deselect, int select) {
 
         addressesAdapterFrag.notifyItemChanged(deselect);
         addressesAdapterFrag.notifyItemChanged(select);

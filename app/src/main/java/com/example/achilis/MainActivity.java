@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }else {
             SystemClock.sleep(3000);
-           // Intent loginIntent = new Intent(MainActivity.this,RegisterActivity.class);
-            Intent loginIntent = new Intent(MainActivity.this,HomeActivity.class);
+            Intent loginIntent = new Intent(MainActivity.this,RegisterActivity.class);
+            //Intent loginIntent = new Intent(MainActivity.this,ProductDetailsActivity.class);
             startActivity(loginIntent);
             finish();
         }

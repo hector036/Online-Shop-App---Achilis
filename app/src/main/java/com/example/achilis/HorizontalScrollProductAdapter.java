@@ -26,7 +26,7 @@ public class HorizontalScrollProductAdapter extends RecyclerView.Adapter<Horizon
     @NonNull
     @Override
     public HorizontalScrollProductAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.horizontal_scroll_layout_item,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.horizontal_scroll_layout_item, viewGroup, false);
 
 
         return new ViewHolder(view);
@@ -40,18 +40,15 @@ public class HorizontalScrollProductAdapter extends RecyclerView.Adapter<Horizon
         String des = horizontalScrollProductModelList.get(i).getProductDes();
         String price = horizontalScrollProductModelList.get(i).getProductPrice();
 
-        viewHolder.setProductImage(resource);
-        viewHolder.setProductTitle(title);
-        viewHolder.setProductDes(des);
-        viewHolder.setProductPrice(price);
+      viewHolder.setData(resource,title,des,price);
 
     }
 
     @Override
     public int getItemCount() {
-        if(horizontalScrollProductModelList.size()>8){
+        if (horizontalScrollProductModelList.size() > 8) {
             return 8;
-        }else
+        } else
             return horizontalScrollProductModelList.size();
     }
 
@@ -61,41 +58,34 @@ public class HorizontalScrollProductAdapter extends RecyclerView.Adapter<Horizon
         private TextView productTitle;
         private TextView productDes;
         private TextView productPrice;
+
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
-            productImage =  itemView.findViewById(R.id.horizontal_scroll_product_image);
-            productTitle =  itemView.findViewById(R.id.horizontal_scroll_product_title);
-            productDes =  itemView.findViewById(R.id.horizontal_scroll_product_description);
-            productPrice =  itemView.findViewById(R.id.horizontal_scroll_product_price);
+            productImage = itemView.findViewById(R.id.horizontal_scroll_product_image);
+            productTitle = itemView.findViewById(R.id.horizontal_scroll_product_title);
+            productDes = itemView.findViewById(R.id.horizontal_scroll_product_description);
+            productPrice = itemView.findViewById(R.id.horizontal_scroll_product_price);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent productDetailsIntent = new Intent(itemView.getContext(),ProductDetailsActivity.class);
-                    itemView.getContext().startActivity(productDetailsIntent);
-                }
-            });
-        }
-
-        private void setProductImage(String iconUrl){
-            Glide.with(itemView.getContext()).load(iconUrl).apply(new RequestOptions().placeholder(R.mipmap.home_black)).into(productImage);
 
         }
 
+        private void setData(String iconUrl, String t1, String t2, String t3) {
+            Glide.with(itemView.getContext()).load(iconUrl).apply(new RequestOptions().placeholder(R.mipmap.ph_rec)).into(productImage);
+            productTitle.setText(t1);
+            productDes.setText(t2);
+            productPrice.setText("Tk. " + t3 + "/-");
 
-        private void setProductTitle(String t){
-            productTitle.setText(t);
+            if (!t1.equals("")) {
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent productDetailsIntent = new Intent(itemView.getContext(), ProductDetailsActivity.class);
+                        itemView.getContext().startActivity(productDetailsIntent);
+                    }
+                });
+            }
         }
-
-        private void setProductDes(String t){
-            productDes.setText(t);
-        }
-
-        private void setProductPrice(String t){
-            productPrice.setText("Tk. "+t+"/-");
-        }
-
 
 
     }

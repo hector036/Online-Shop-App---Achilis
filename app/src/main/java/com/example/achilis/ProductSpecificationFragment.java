@@ -24,6 +24,9 @@ public class ProductSpecificationFragment extends Fragment {
     }
 
     private RecyclerView productSpecificationRecyclerView;
+    //static
+    public List<ProductSpecificationModel> productSpecificationModelList;
+
 
 
     @Override
@@ -36,9 +39,8 @@ public class ProductSpecificationFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         productSpecificationRecyclerView.setLayoutManager(linearLayoutManager);
 
-        List<ProductSpecificationModel> productSpecificationModelList = new ArrayList<>();
 
-               productSpecificationModelList.add(new ProductSpecificationModel(0,"General"));
+        /*productSpecificationModelList.add(new ProductSpecificationModel(0,"General"));
         productSpecificationModelList.add(new ProductSpecificationModel(1,"Ram","4gb"));
         productSpecificationModelList.add(new ProductSpecificationModel(1,"Ram","4gb"));
         productSpecificationModelList.add(new ProductSpecificationModel(1,"Ram","4gb"));
@@ -56,7 +58,7 @@ public class ProductSpecificationFragment extends Fragment {
         productSpecificationModelList.add(new ProductSpecificationModel(1,"Ram","4gb"));
         productSpecificationModelList.add(new ProductSpecificationModel(1,"Ram","4gb"));
         productSpecificationModelList.add(new ProductSpecificationModel(1,"Ram","4gb"));
-
+*/
         ProductSpecificationAdapter productSpecificationAdapter = new ProductSpecificationAdapter(productSpecificationModelList);
 
         productSpecificationAdapter.notifyDataSetChanged();

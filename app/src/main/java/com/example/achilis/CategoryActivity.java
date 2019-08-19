@@ -19,6 +19,8 @@ public class CategoryActivity extends AppCompatActivity {
 
     private RecyclerView categoryRecyclerView;
     private HomePageAdapter adapter;
+    private List<HomePageModel> homePageModelArrayFakeList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,20 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        List<HorizontalScrollProductModel> horizontalScrollProductModelList = new ArrayList<>();
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
+
+        homePageModelArrayFakeList.add(new HomePageModel(0,"",horizontalScrollProductModelList,new ArrayList<WishListModel>()));
+        homePageModelArrayFakeList.add(new HomePageModel(1,"",horizontalScrollProductModelList));
+
 
         String title = getIntent().getStringExtra("CategoryName");
         getSupportActionBar().setTitle(title);
@@ -38,7 +54,7 @@ public class CategoryActivity extends AppCompatActivity {
         testingLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         categoryRecyclerView.setLayoutManager(testingLayoutManager);
 
-
+        adapter = new HomePageAdapter(homePageModelArrayFakeList);
 
         int listPosition=0;
         for(int x = 0; x<loadedCategoriesName.size();x++){
@@ -50,15 +66,17 @@ public class CategoryActivity extends AppCompatActivity {
         if(listPosition==0){
             loadedCategoriesName.add(title.toUpperCase());
             lists.add(new ArrayList<HomePageModel>());
-            adapter = new HomePageAdapter(lists.get(loadedCategoriesName.size()-1));
+
             ////******
-            loadFragmentData(adapter, this,loadedCategoriesName.size()-1,title);
+            loadFragmentData(categoryRecyclerView, this,loadedCategoriesName.size()-1,title);
         }else {
             adapter = new HomePageAdapter(lists.get(listPosition));
 
         }
 
+
         categoryRecyclerView.setAdapter(adapter);
+
         adapter.notifyDataSetChanged();
 
     }

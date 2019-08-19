@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private List<CategoryModel> categoryModelList;
+    private int lastPosition =-1;
 
     public CategoryAdapter(List<CategoryModel> categoryModelList) {
         this.categoryModelList = categoryModelList;
@@ -35,6 +38,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder viewHolder, int pos) {
 
@@ -43,6 +47,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         viewHolder.setCategory(name, pos);
         viewHolder.setCategoryIcon(icon);
+
+
+        if (lastPosition < pos) {
+            Animation animation = AnimationUtils.loadAnimation(viewHolder.itemView.getContext(), R.anim.fade_in);
+            viewHolder.itemView.setAnimation(animation);
+            lastPosition = pos;
+        }
     }
 
     @Override
@@ -67,7 +78,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         private void setCategoryIcon(String iconUrl) {
             if (!iconUrl.equals("null")) {
                 categoryIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#727272")));
-                Glide.with(itemView.getContext()).load(iconUrl).apply(new RequestOptions().placeholder(R.mipmap.home_black)).into(categoryIcon);
+                Glide.with(itemView.getContext()).load(iconUrl).apply(new RequestOptions().placeholder(R.mipmap.ph_round)).into(categoryIcon);
+            }else {
+                categoryIcon.setImageResource(R.mipmap.home_black);
             }
         }
 
@@ -75,17 +88,19 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
             categoryName.setText(name);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (position != 0) {
-                        Intent categoryIntent = new Intent(itemView.getContext(), CategoryActivity.class);
-                        categoryIntent.putExtra("CategoryName", name);
-                        itemView.getContext().startActivity(categoryIntent);
-                    }
+            if (!name.equals("")) {
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (position != 0) {
+                            Intent categoryIntent = new Intent(itemView.getContext(), CategoryActivity.class);
+                            categoryIntent.putExtra("CategoryName", name);
+                            itemView.getContext().startActivity(categoryIntent);
+                        }
 
-                }
-            });
+                    }
+                });
+            }
         }
 
 

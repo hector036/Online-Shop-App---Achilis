@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/category_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@mipmap/home_black" />
+        app:srcCompat="@mipmap/ph_round" />
 
     <TextView
         android:id="@+id/category_name"

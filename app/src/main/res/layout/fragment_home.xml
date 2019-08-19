@@ -12,28 +12,37 @@
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:elevation="8dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/testing"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout_home"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/colorAccent"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categories_reclycler_view" />
+        app:layout_constraintTop_toBottomOf="@+id/categories_reclycler_view">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/testing"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:background="@color/colorAccent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <ImageView
         android:id="@+id/no_internet_connection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
+        android:src="@mipmap/no_internet_connection"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

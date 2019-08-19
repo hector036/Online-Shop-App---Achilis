@@ -2,6 +2,8 @@ package com.example.achilis;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +26,7 @@ public class DBqueries {
     public static List<String> loadedCategoriesName = new ArrayList();
 
 
-    public static void loadCategories(final CategoryAdapter categoryAdapter, final Context context){
+    public static void loadCategories(final RecyclerView categoryRecyclerView, final Context context){
 
 
 
@@ -36,17 +38,19 @@ public class DBqueries {
                             for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                 categoryModelList.add(new CategoryModel(documentSnapshot.get("icon").toString(), documentSnapshot.get("categoryName").toString()));
                             }
+                            CategoryAdapter categoryAdapter = new CategoryAdapter(categoryModelList);
+                            categoryRecyclerView.setAdapter(categoryAdapter);
                             categoryAdapter.notifyDataSetChanged();
                         } else {
                             String error = task.getException().getMessage();
-                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "1", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
     }
 
-    public static void loadFragmentData(final HomePageAdapter adapter, final Context context,final int index,String categoryName){
+    public static void loadFragmentData(final RecyclerView homeRecyclerViewfinal, final Context context, final int index, String categoryName){
 
         firebaseFirestore.collection("CATEGORIES")
                 .document(categoryName.toUpperCase())
@@ -97,18 +101,16 @@ public class DBqueries {
                                     }
 
                                     lists.get(index).add(new HomePageModel(1,documentSnapshot.get("layout_title").toString(),gridProductModelList));
-                                    lists.get(index).add(new HomePageModel(1,documentSnapshot.get("layout_title").toString(),gridProductModelList));
-                                    lists.get(index).add(new HomePageModel(1,documentSnapshot.get("layout_title").toString(),gridProductModelList));
-                                    lists.get(index).add(new HomePageModel(1,documentSnapshot.get("layout_title").toString(),gridProductModelList));
-
-
                                 }
 
-                                adapter.notifyDataSetChanged();
+                                HomePageAdapter homePageAdapter = new HomePageAdapter(lists.get(index));
+                                homeRecyclerViewfinal.setAdapter(homePageAdapter);
+                                homePageAdapter.notifyDataSetChanged();
+                                HomeFragment.swipeRefreshLayout.setRefreshing(false);
                             }
                         }else {
                             String error = task.getException().getMessage();
-                            Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "2", Toast.LENGTH_SHORT).show();
 
                         }
                     }

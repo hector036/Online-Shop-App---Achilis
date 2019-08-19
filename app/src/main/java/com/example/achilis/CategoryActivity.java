@@ -39,8 +39,9 @@ public class CategoryActivity extends AppCompatActivity {
         horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
         horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
 
-        homePageModelArrayFakeList.add(new HomePageModel(0,"",horizontalScrollProductModelList,new ArrayList<WishListModel>()));
-        homePageModelArrayFakeList.add(new HomePageModel(1,"",horizontalScrollProductModelList));
+
+       // homePageModelArrayFakeList.add(new HomePageModel(0,"",horizontalScrollProductModelList,new ArrayList<WishListModel>()));
+       // homePageModelArrayFakeList.add(new HomePageModel(1,"",horizontalScrollProductModelList));
 
 
         String title = getIntent().getStringExtra("CategoryName");
@@ -68,7 +69,7 @@ public class CategoryActivity extends AppCompatActivity {
             lists.add(new ArrayList<HomePageModel>());
 
             ////******
-            loadFragmentData(categoryRecyclerView, this,loadedCategoriesName.size()-1,title);
+            loadFragmentData(categoryRecyclerView, this,loadedCategoriesName.size()-1,title,false);
         }else {
             adapter = new HomePageAdapter(lists.get(listPosition));
 

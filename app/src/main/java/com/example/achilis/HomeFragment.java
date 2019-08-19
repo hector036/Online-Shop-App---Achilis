@@ -32,7 +32,9 @@ import java.util.List;
 import static com.example.achilis.DBqueries.categoryModelList;
 import static com.example.achilis.DBqueries.firebaseFirestore;
 
+
 import static com.example.achilis.DBqueries.lists;
+import static com.example.achilis.DBqueries.listsCopy;
 import static com.example.achilis.DBqueries.loadCategories;
 import static com.example.achilis.DBqueries.loadFragmentData;
 import static com.example.achilis.DBqueries.loadedCategoriesName;
@@ -45,9 +47,11 @@ public class HomeFragment extends Fragment {
 
 
     private RecyclerView categoryRecyclerView;
-    private  RecyclerView homePageRecyclerView;
+    private RecyclerView homePageRecyclerView;
     private CategoryAdapter categoryAdapter;
     public static SwipeRefreshLayout swipeRefreshLayout;
+   public static boolean  isListNoOneStatic=true;
+
 
     private List<CategoryModel> categoryModeFakelList = new ArrayList<>();
     private List<HomePageModel> homePageModelArrayFakeList = new ArrayList<>();
@@ -81,7 +85,7 @@ public class HomeFragment extends Fragment {
 
         categoryRecyclerView = view.findViewById(R.id.categories_reclycler_view);
         homePageRecyclerView = view.findViewById(R.id.testing);
-        swipeRefreshLayout.setColorSchemeColors(getContext().getResources().getColor(R.color.colorPrimary),getContext().getResources().getColor(R.color.colorPrimary),getContext().getResources().getColor(R.color.colorPrimary));
+        swipeRefreshLayout.setColorSchemeColors(getContext().getResources().getColor(R.color.colorPrimary), getContext().getResources().getColor(R.color.colorPrimary), getContext().getResources().getColor(R.color.colorPrimary));
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -94,37 +98,40 @@ public class HomeFragment extends Fragment {
         homePageRecyclerView.setLayoutManager(testingLayoutManager);
 
 
-
-
-        categoryModeFakelList.add(new CategoryModel("null",""));
-        categoryModeFakelList.add(new CategoryModel("",""));
-        categoryModeFakelList.add(new CategoryModel("",""));
-        categoryModeFakelList.add(new CategoryModel("",""));
-        categoryModeFakelList.add(new CategoryModel("",""));
-        categoryModeFakelList.add(new CategoryModel("",""));
-        categoryModeFakelList.add(new CategoryModel("",""));
-        categoryModeFakelList.add(new CategoryModel("",""));
-        categoryModeFakelList.add(new CategoryModel("",""));
-        categoryModeFakelList.add(new CategoryModel("",""));
+        categoryModeFakelList.add(new CategoryModel("null", ""));
+        categoryModeFakelList.add(new CategoryModel("", ""));
+        categoryModeFakelList.add(new CategoryModel("", ""));
+        categoryModeFakelList.add(new CategoryModel("", ""));
+        categoryModeFakelList.add(new CategoryModel("", ""));
+        categoryModeFakelList.add(new CategoryModel("", ""));
+        categoryModeFakelList.add(new CategoryModel("", ""));
+        categoryModeFakelList.add(new CategoryModel("", ""));
+        categoryModeFakelList.add(new CategoryModel("", ""));
+        categoryModeFakelList.add(new CategoryModel("", ""));
 
         //////fake
 
         List<HorizontalScrollProductModel> horizontalScrollProductModelList = new ArrayList<>();
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
-        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("","","","",""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("", "", "", "", ""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("", "", "", "", ""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("", "", "", "", ""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("", "", "", "", ""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("", "", "", "", ""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("", "", "", "", ""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("", "", "", "", ""));
+        horizontalScrollProductModelList.add(new HorizontalScrollProductModel("", "", "", "", ""));
 
-        homePageModelArrayFakeList.add(new HomePageModel(0,"",horizontalScrollProductModelList,new ArrayList<WishListModel>()));
-        homePageModelArrayFakeList.add(new HomePageModel(1,"",horizontalScrollProductModelList));
+        //homePageModelArrayFakeList.add(new HomePageModel(0,"",horizontalScrollProductModelList,new ArrayList<WishListModel>()));
+        //  homePageModelArrayFakeList.add(new HomePageModel(1,"",horizontalScrollProductModelList));
+        // homePageModelArrayFakeList.addAll(lists.get(0));
+
+
         //////fake
 
+        ///seems bekar
         categoryAdapter = new CategoryAdapter(categoryModeFakelList);
         adapter = new HomePageAdapter(homePageModelArrayFakeList);
+        ///seems bekar
 
 
         connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -135,21 +142,34 @@ public class HomeFragment extends Fragment {
 
             if (categoryModelList.size() == 0) {
                 loadCategories(categoryRecyclerView, getContext());
+
+
             } else {
                 categoryAdapter = new CategoryAdapter(categoryModelList);
                 categoryAdapter.notifyDataSetChanged();
+
+
             }
 
             categoryRecyclerView.setAdapter(categoryAdapter);
 
-            if (lists.size() == 0) {
+            if (lists.size() == 0 && listsCopy.size() == 0) {
                 loadedCategoriesName.add("HOME");
                 lists.add(new ArrayList<HomePageModel>());
+                listsCopy.add(new ArrayList<HomePageModel>());
 
-                loadFragmentData(homePageRecyclerView, getContext(), 0, "Home");
+                loadFragmentData(homePageRecyclerView, getContext(), 0, "Home",false);
+
             } else {
-                adapter = new HomePageAdapter(lists.get(0));
-                adapter.notifyDataSetChanged();
+                if (isListNoOneStatic) {
+                    adapter = new HomePageAdapter(lists.get(0));
+                    adapter.notifyDataSetChanged();
+
+                } else  {
+                    adapter = new HomePageAdapter(listsCopy.get(0));
+                    adapter.notifyDataSetChanged();
+
+                }
             }
             homePageRecyclerView.setAdapter(adapter);
 
@@ -159,31 +179,52 @@ public class HomeFragment extends Fragment {
             Glide.with(this).load(R.mipmap.no_internet_connection).into(noInternetConnection);
             noInternetConnection.setVisibility(View.VISIBLE);
         }
+        // homePageModelArrayFakeList.addAll(lists.get(0));
 
         ///// refresh
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-               swipeRefreshLayout.setRefreshing(true);
+                swipeRefreshLayout.setRefreshing(true);
 
+              /*  //we are creating fake list as previout list
+                if (homePageModelArrayFakeList.size() != 0) {
+                    homePageModelArrayFakeList.clear();
+
+                }
+                homePageModelArrayFakeList.addAll(lists.get(0));
+
+                //we are creating fake list as previout list*/
                 categoryModelList.clear();
-                lists.clear();
+
+                if (isListNoOneStatic) {
+                    listsCopy.clear();
+                } else {
+                    lists.clear();
+                }
+                // lists.clear();
                 loadedCategoriesName.clear();
                 if (networkInfo != null && networkInfo.isConnected() == true) {
                     noInternetConnection.setVisibility(View.GONE);
 
                     categoryAdapter = new CategoryAdapter(categoryModeFakelList);
-                    adapter = new HomePageAdapter(homePageModelArrayFakeList);
+                    //adapter = new HomePageAdapter(homePageModelArrayFakeList);
                     categoryRecyclerView.setAdapter(categoryAdapter);
-
-                    homePageRecyclerView.setAdapter(adapter);
-
+                    //homePageRecyclerView.setAdapter(adapter);
                     loadCategories(categoryRecyclerView, getContext());
-
                     loadedCategoriesName.add("HOME");
-                    lists.add(new ArrayList<HomePageModel>());
-
-                    loadFragmentData(homePageRecyclerView, getContext(), 0, "Home");
+                    if (isListNoOneStatic) {
+                        listsCopy.add(new ArrayList<HomePageModel>());
+                    } else {
+                        lists.add(new ArrayList<HomePageModel>());
+                    }
+                    loadFragmentData(homePageRecyclerView, getContext(), 0, "Home",isListNoOneStatic);
+                    if(isListNoOneStatic){
+                        isListNoOneStatic = false;
+                    }else {
+                        isListNoOneStatic = true;
+                    }
+                    ///////
 
                 } else {
 

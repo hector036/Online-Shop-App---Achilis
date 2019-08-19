@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -14,6 +15,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.achilis.CategoryActivity.progressBarCategotyActivity;
+import static com.example.achilis.HomeFragment.progressBar;
 
 
 public class DBqueries {
@@ -60,6 +64,12 @@ public class DBqueries {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            if(progressBarCategotyActivity!=null){
+                                progressBarCategotyActivity.setVisibility(View.INVISIBLE);
+
+                            }
+
                             for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
 
                                 if ((long) documentSnapshot.get("view_type") == 0) {
@@ -146,11 +156,14 @@ public class DBqueries {
                                 HomeFragment.swipeRefreshLayout.setRefreshing(false);
                             }
                         } else {
+                            progressBar.setVisibility(View.INVISIBLE);
+
                             String error = task.getException().getMessage();
                             Toast.makeText(context, "2", Toast.LENGTH_SHORT).show();
 
                         }
                     }
                 });
+
     }
 }

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView homePageRecyclerView;
     private CategoryAdapter categoryAdapter;
     public static SwipeRefreshLayout swipeRefreshLayout;
+    public static ProgressBar progressBar;
    public static boolean  isListNoOneStatic=true;
 
 
@@ -82,6 +84,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         noInternetConnection = view.findViewById(R.id.no_internet_connection);
         swipeRefreshLayout = view.findViewById(R.id.refresh_layout_home);
+        progressBar = view.findViewById(R.id.progressBar_home);
 
         categoryRecyclerView = view.findViewById(R.id.categories_reclycler_view);
         homePageRecyclerView = view.findViewById(R.id.testing);
@@ -154,11 +157,12 @@ public class HomeFragment extends Fragment {
             categoryRecyclerView.setAdapter(categoryAdapter);
 
             if (lists.size() == 0 && listsCopy.size() == 0) {
+                progressBar.setVisibility(View.VISIBLE);
                 loadedCategoriesName.add("HOME");
                 lists.add(new ArrayList<HomePageModel>());
                 listsCopy.add(new ArrayList<HomePageModel>());
-
                 loadFragmentData(homePageRecyclerView, getContext(), 0, "Home",false);
+
 
             } else {
                 if (isListNoOneStatic) {
@@ -172,6 +176,7 @@ public class HomeFragment extends Fragment {
                 }
             }
             homePageRecyclerView.setAdapter(adapter);
+
 
 
         } else {

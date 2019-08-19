@@ -77,14 +77,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         private void setCategoryIcon(String iconUrl) {
             if (iconUrl.equals("null")) {
+                categoryIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#CE0000")));
                 categoryIcon.setImageResource(R.mipmap.home_black);
             } else if (iconUrl.equals("")) {
                 categoryIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#E5E5E5")));
                 Glide.with(itemView.getContext()).load(iconUrl).apply(new RequestOptions().placeholder(R.mipmap.ph_rec)).into(categoryIcon);
 
             } else {
-                categoryIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#727272")));
+
                 Glide.with(itemView.getContext()).load(iconUrl).apply(new RequestOptions().placeholder(R.mipmap.ph_rec)).into(categoryIcon);
+                categoryIcon.setImageTintList(ColorStateList.valueOf(Color.parseColor("#727272")));
 
             }
         }

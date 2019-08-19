@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ public class CategoryActivity extends AppCompatActivity {
     private RecyclerView categoryRecyclerView;
     private HomePageAdapter adapter;
     private List<HomePageModel> homePageModelArrayFakeList = new ArrayList<>();
+    public static ProgressBar progressBarCategotyActivity;
 
 
     @Override
@@ -49,6 +52,7 @@ public class CategoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         categoryRecyclerView = findViewById(R.id.category_activity_recycler_view);
+        progressBarCategotyActivity = findViewById(R.id.progressBar_category_activity);
 
 
         LinearLayoutManager testingLayoutManager = new LinearLayoutManager(this);
@@ -65,6 +69,7 @@ public class CategoryActivity extends AppCompatActivity {
         }
 
         if(listPosition==0){
+            progressBarCategotyActivity.setVisibility(View.VISIBLE);
             loadedCategoriesName.add(title.toUpperCase());
             lists.add(new ArrayList<HomePageModel>());
 

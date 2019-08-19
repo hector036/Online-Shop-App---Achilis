@@ -11,7 +11,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginBottom="2dp"
-        android:tint="@color/colorPrimary"
+        android:tint="#E5E5E5"
         app:layout_constraintBottom_toTopOf="@+id/category_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

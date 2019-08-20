@@ -46,7 +46,7 @@ public class SignUpFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private EditText firstName,lastName,email,password;
+    private EditText firstName, lastName, email, password;
     private Button signUpButton;
     private ProgressBar progressBar;
     private FrameLayout parentFrameLayout;
@@ -153,85 +153,103 @@ public class SignUpFragment extends Fragment {
     }
 
     private void sendData() {
-        final ProgressDialog dialog = new ProgressDialog(getActivity(),R.style.dialogStyle);
+        final ProgressDialog dialog = new ProgressDialog(getActivity(), R.style.dialogStyle);
         dialog.setMessage("Signing up...");
         dialog.setCancelable(false);
 
-            signUpButton.setEnabled(false);
-            signUpButton.setTextColor(Color.argb(50,255,255,255));
+        signUpButton.setEnabled(false);
+        signUpButton.setTextColor(Color.argb(50, 255, 255, 255));
 
-            dialog.show();
-            firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
+        dialog.show();
+        firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
 
-                                Map<Object,String> userdata = new HashMap<>();
-                                userdata.put("firstname",firstName.getText().toString());
+                            Map<String,Object> userdata = new HashMap<>();
+                            userdata.put("firstname", firstName.getText().toString());
 
-                                firebaseFirestore.collection("USERS")
-                                        .add(userdata)
-                                        .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                if(task.isSuccessful()){
+                            firebaseFirestore.collection("USERS").document(firebaseAuth.getUid())
+                                    .set(userdata)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
 
-                                                    if(closeBtnDisabled){
-                                                        closeBtnDisabled=false;
-                                                    }else {
-                                                        Intent homeIntent = new Intent(getActivity(),HomeActivity.class);
-                                                        startActivity(homeIntent);
+                                                Map<String,Object> list_size = new HashMap<>();
+                                                list_size.put("list_size", (long) 0);
+
+
+                                                firebaseFirestore.collection("USERS").document(firebaseAuth.getUid()).collection("USER_DATA").document("MY_WISHLIST")
+                                                        .set(list_size).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                                        if (task.isSuccessful()) {
+                                                            if (closeBtnDisabled) {
+                                                                closeBtnDisabled = false;
+                                                            } else {
+                                                                Intent homeIntent = new Intent(getActivity(), HomeActivity.class);
+                                                                startActivity(homeIntent);
+                                                            }
+                                                            getActivity().finish();
+                                                        } else {
+                                                            dialog.dismiss();
+                                                            signUpButton.setEnabled(true);
+                                                            signUpButton.setTextColor(Color.rgb(255, 255, 255));
+                                                            String error = task.getException().getMessage();
+                                                            Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+
+                                                        }
                                                     }
-                                                    getActivity().finish();
-                                                }else{
-                                                    dialog.dismiss();
-                                                    signUpButton.setEnabled(true);
-                                                    signUpButton.setTextColor(Color.rgb(255,255,255));
-                                                    String error = task.getException().getMessage();
-                                                    Toast.makeText(getActivity(),error,Toast.LENGTH_SHORT).show();
-                                                }
+                                                });
+
+
+                                            } else {
+                                                String error = task.getException().getMessage();
+                                                Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
                                             }
-                                        });
+                                        }
+                                    });
 
 
-                            }else{
-                                dialog.dismiss();
-                                signUpButton.setEnabled(true);
-                                signUpButton.setTextColor(Color.rgb(255,255,255));
-                                String error = task.getException().getMessage();
-                                Toast.makeText(getActivity(),error,Toast.LENGTH_SHORT).show();
-                            }
+                        } else {
+                            dialog.dismiss();
+                            signUpButton.setEnabled(true);
+                            signUpButton.setTextColor(Color.rgb(255, 255, 255));
+                            String error = task.getException().getMessage();
+                            Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }
+                });
 
 
     }
 
 
-
     private void checkInputs() {
-        if(!TextUtils.isEmpty(firstName.getText())){
-            if(!TextUtils.isEmpty(lastName.getText())){
-                if(!TextUtils.isEmpty(email.getText())){
-                    if(!TextUtils.isEmpty(password.getText()) && password.length() >= 6){
+        if (!TextUtils.isEmpty(firstName.getText())) {
+            if (!TextUtils.isEmpty(lastName.getText())) {
+                if (!TextUtils.isEmpty(email.getText())) {
+                    if (!TextUtils.isEmpty(password.getText()) && password.length() >= 6) {
                         signUpButton.setEnabled(true);
-                        signUpButton.setTextColor(Color.rgb(255,255,255));
-                    }else{
+                        signUpButton.setTextColor(Color.rgb(255, 255, 255));
+                    } else {
                         signUpButton.setEnabled(false);
-                        signUpButton.setTextColor(Color.argb(50,255,255,255));
+                        signUpButton.setTextColor(Color.argb(50, 255, 255, 255));
                     }
-                }else{
+                } else {
                     signUpButton.setEnabled(false);
-                    signUpButton.setTextColor(Color.argb(50,255,255,255));
+                    signUpButton.setTextColor(Color.argb(50, 255, 255, 255));
                 }
-            }else{
+            } else {
                 signUpButton.setEnabled(false);
-                signUpButton.setTextColor(Color.argb(50,255,255,255));
+                signUpButton.setTextColor(Color.argb(50, 255, 255, 255));
             }
-        }else {
+        } else {
             signUpButton.setEnabled(false);
-            signUpButton.setTextColor(Color.argb(50,255,255,255));
+            signUpButton.setTextColor(Color.argb(50, 255, 255, 255));
         }
     }
 }

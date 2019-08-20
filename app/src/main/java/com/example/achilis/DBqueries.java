@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -22,6 +24,9 @@ import static com.example.achilis.HomeFragment.progressBar;
 
 public class DBqueries {
 
+
+   // public static FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+   // public static FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
     public static FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     public static List<CategoryModel> categoryModelList = new ArrayList();
@@ -40,7 +45,7 @@ public class DBqueries {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                           for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                 categoryModelList.add(new CategoryModel(documentSnapshot.get("icon").toString(), documentSnapshot.get("categoryName").toString()));
                             }
                             CategoryAdapter categoryAdapter = new CategoryAdapter(categoryModelList);

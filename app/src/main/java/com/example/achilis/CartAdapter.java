@@ -1,10 +1,13 @@
 package com.example.achilis;
 
+import android.app.Dialog;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -90,8 +93,8 @@ public class CartAdapter extends RecyclerView.Adapter {
         private TextView productPrice;
         private TextView cuttedPrice;
         private TextView offerApplied;
-       // private TextView couponApplied;
-       // private TextView productQty;
+        private TextView couponApplied;
+        private TextView productQty;
 
         public CartItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -102,8 +105,8 @@ public class CartAdapter extends RecyclerView.Adapter {
             productPrice = itemView.findViewById(R.id.product_price_cart);
             cuttedPrice = itemView.findViewById(R.id.cuttred_price_cart);
             offerApplied = itemView.findViewById(R.id.offer_appied_cart);
-           // couponApplied = itemView.findViewById(R.id.coupon_applied_cart);
-          //  productQty = itemView.findViewById(R.id.product_quantity_cart);
+            couponApplied = itemView.findViewById(R.id.coupon_applied_cart);
+            productQty = itemView.findViewById(R.id.product_quantity_cart);
 
 
 
@@ -138,6 +141,38 @@ public class CartAdapter extends RecyclerView.Adapter {
             } else {
                 offerApplied.setVisibility(View.INVISIBLE);
             }
+
+            productQty.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final Dialog quantityDialog = new Dialog(itemView.getContext());
+                    quantityDialog.setContentView(R.layout.quantity_dialog);
+                    quantityDialog.setCancelable(false);
+                    quantityDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                    final EditText quantityNum = quantityDialog.findViewById(R.id.quantity_num_dialog);
+                    Button cancelBtn = quantityDialog.findViewById(R.id.cancel_btn_dialog);
+                    Button okBtn = quantityDialog.findViewById(R.id.ok_btn_dialog);
+
+                    cancelBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            quantityDialog.dismiss();
+                        }
+                    });
+                    okBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            productQty.setText("Qty: " + quantityNum.getText());
+                            quantityDialog.dismiss();
+                        }
+                    });
+                    quantityDialog.show();
+                }
+            });
+
+
 
             //couponApplied.setText(s6);
            // productQty.setText(s7);

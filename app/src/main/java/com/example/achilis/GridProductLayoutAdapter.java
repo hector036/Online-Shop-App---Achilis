@@ -41,7 +41,7 @@ public class GridProductLayoutAdapter extends BaseAdapter {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public View getView(int i, View convertView, final ViewGroup parent) {
+    public View getView(final int i, View convertView, final ViewGroup parent) {
        View view;
        if(convertView == null){
            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizontal_scroll_layout_item,null);
@@ -52,6 +52,7 @@ public class GridProductLayoutAdapter extends BaseAdapter {
               @Override
               public void onClick(View view) {
                   Intent productDetailsIntent = new Intent(parent.getContext(),ProductDetailsActivity.class);
+                 productDetailsIntent.putExtra("PRODUCT_ID",horizontalScrollProductModelList.get(i).getProductID());
                   parent.getContext().startActivity(productDetailsIntent);
               }
           });

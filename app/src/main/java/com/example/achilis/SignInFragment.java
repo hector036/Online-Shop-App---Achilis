@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import static com.example.achilis.RegisterActivity.closeBtnDisabled;
 import static com.example.achilis.RegisterActivity.onResetPasswordFragment;
 import static com.example.achilis.RegisterActivity.onSignInFragment;
 import static com.example.achilis.RegisterActivity.onSignUnFragment;
@@ -144,8 +145,14 @@ public class SignInFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent homeIntent = new Intent(getActivity(),HomeActivity.class);
-                            startActivity(homeIntent);
+
+                            if(closeBtnDisabled){
+                                closeBtnDisabled=false;
+                            }else {
+                                Intent homeIntent = new Intent(getActivity(),HomeActivity.class);
+                                startActivity(homeIntent);
+                            }
+
                             getActivity().finish();
                         }else{
                             dialog.dismiss();

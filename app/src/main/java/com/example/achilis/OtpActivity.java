@@ -36,6 +36,8 @@ import com.hbb20.CountryCodePicker;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import static com.example.achilis.RegisterActivity.closeBtnDisabled;
+
 public class OtpActivity extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseAuth mAuth;
@@ -252,8 +254,12 @@ public class OtpActivity extends AppCompatActivity implements View.OnClickListen
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential:success");
 
-                            Intent homeIntent = new Intent(OtpActivity.this,HomeActivity.class);
-                            startActivity(homeIntent);
+                            if(closeBtnDisabled){
+                                closeBtnDisabled=false;
+                            }else {
+                                Intent homeIntent = new Intent(OtpActivity.this,HomeActivity.class);
+                                startActivity(homeIntent);
+                            }
                             finish();
                             RegisterActivity.getInstance().finish();
                             FirebaseUser user = task.getResult().getUser();

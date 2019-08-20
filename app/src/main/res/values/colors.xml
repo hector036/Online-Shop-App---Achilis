@@ -10,5 +10,6 @@
   <color name="green">#00BB06</color>
   <color name="recycler_view_bg">#DFDADA</color>
   <color name="brown_text_color">#9A9B9B</color>
-  <color name="brown_option_bg_color">#FAFAFA</color>FAFAFA
+  <color name="brown_option_bg_color">#FAFAFA</color>
+  <color name="green_deep">#2F8544</color>
 </resources>

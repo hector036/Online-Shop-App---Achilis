@@ -1,5 +1,6 @@
 package com.example.achilis;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -19,6 +20,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -29,9 +32,13 @@ import com.google.firebase.auth.FirebaseUser;
 import java.time.ZoneOffset;
 
 import static com.example.achilis.MyAccountFragment.MANAGE_ADDRESS;
+import static com.example.achilis.RegisterActivity.closeBtnDisabled;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    private FirebaseUser currentUser;
 
     public static AddressesAdapter addressesAdapterFrag;
 
@@ -49,6 +56,8 @@ public class HomeActivity extends AppCompatActivity
     private FrameLayout parentFrameLayout;
     private NavigationView navigationView;
     private ImageView actionBarLogo;
+    private Dialog signInDialog;
+    public static DrawerLayout drawer;
 
     private int currentFragement = -1;
 
@@ -62,7 +71,7 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
 
@@ -85,6 +94,39 @@ public class HomeActivity extends AppCompatActivity
 
 
 
+        signInDialog = new Dialog(HomeActivity.this);
+        signInDialog.setContentView(R.layout.sign_in_dialog);
+        signInDialog.setCancelable(true);
+        signInDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        Button dialogLogInBtn = signInDialog.findViewById(R.id.login_btn_dialog);
+
+        final Intent registerIntent = new Intent(HomeActivity.this, RegisterActivity.class);
+
+        dialogLogInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // setSignUpFragment = false;
+                closeBtnDisabled = true;
+                startActivity(registerIntent);
+                signInDialog.dismiss();
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+
+            navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(false);
+        } else {
+            navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(true);
+
+        }
     }
 
     @Override
@@ -133,8 +175,12 @@ public class HomeActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.home_cart_icon) {
+            if (currentUser==null) {
+                signInDialog.show();
 
-            goToFragment("My Cart", new MyCartFragment(), CART_FRAGEMENT);
+            } else {
+                goToFragment("My Cart", new MyCartFragment(), CART_FRAGEMENT);
+            }
             return true;
         } else if (id == R.id.home_notification_icon) {
 
@@ -170,44 +216,52 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
+        if(currentUser!=null) {
+            int id = item.getItemId();
 
-            actionBarLogo.setVisibility(View.VISIBLE);
-            invalidateOptionsMenu();
-            setFragment(new HomeFragment(), HOME_FRAGEMENT);
-        } else if (id == R.id.nav_mycart) {
-            goToFragment("My Cart", new MyCartFragment(), CART_FRAGEMENT);
+            if (id == R.id.nav_home) {
+                // Handle the camera action
 
-        } else if (id == R.id.nav_mywishlist) {
-            goToFragment("My Wish", new MyWishListFragment(), WISHLIST_FRAGEMENT);
+                actionBarLogo.setVisibility(View.VISIBLE);
+                invalidateOptionsMenu();
+                setFragment(new HomeFragment(), HOME_FRAGEMENT);
+            } else if (id == R.id.nav_mycart) {
+                goToFragment("My Cart", new MyCartFragment(), CART_FRAGEMENT);
 
-        } else if (id == R.id.nav_myaccount) {
-            goToFragment("My Account", new MyAccountFragment(), ACCOUNT_FRAGEMENT);
+            } else if (id == R.id.nav_mywishlist) {
+                goToFragment("My Wish", new MyWishListFragment(), WISHLIST_FRAGEMENT);
 
-        } else if (id == R.id.nav_signout) {
-            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-            if (firebaseUser != null) {
-                FirebaseAuth.getInstance().signOut();
-                Intent loginIntent = new Intent(HomeActivity.this, RegisterActivity.class);
-                startActivity(loginIntent);
-                finish();
+            } else if (id == R.id.nav_myaccount) {
+                goToFragment("My Account", new MyAccountFragment(), ACCOUNT_FRAGEMENT);
+
+            } else if (id == R.id.nav_signout) {
+
+                    FirebaseAuth.getInstance().signOut();
+                    Intent loginIntent = new Intent(HomeActivity.this, RegisterActivity.class);
+                    startActivity(loginIntent);
+                    finish();
+
+
+            } else if (id == R.id.nav_myaddressess) {
+                goToFragment("My Addresses", new MyAddressesTestFragment(), MYADDRESSES_FRAGEMENT);
+
+            } else if (id == R.id.nav_setting) {
+
+            } else if (id == R.id.nav_myorder) {
+                goToFragment("My Order", new MyOrderFragment(), ORDER_FRAGEMENT);
+
             }
 
-        } else if (id == R.id.nav_myaddressess) {
-            goToFragment("My Addresses", new MyAddressesTestFragment(), MYADDRESSES_FRAGEMENT);
-
-        } else if (id == R.id.nav_setting) {
-
-        } else if (id == R.id.nav_myorder) {
-            goToFragment("My Order", new MyOrderFragment(), ORDER_FRAGEMENT);
-
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        }else {
+            drawer.closeDrawer(GravityCompat.START);
+            signInDialog.show();
+            return false;
         }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+
     }
 
     private void setFragment(Fragment fragment, int fragmentNo) {

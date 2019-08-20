@@ -33,6 +33,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.achilis.RegisterActivity.closeBtnDisabled;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -174,8 +176,13 @@ public class SignUpFragment extends Fragment {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentReference> task) {
                                                 if(task.isSuccessful()){
-                                                    Intent homeIntent = new Intent(getActivity(),HomeActivity.class);
-                                                    startActivity(homeIntent);
+
+                                                    if(closeBtnDisabled){
+                                                        closeBtnDisabled=false;
+                                                    }else {
+                                                        Intent homeIntent = new Intent(getActivity(),HomeActivity.class);
+                                                        startActivity(homeIntent);
+                                                    }
                                                     getActivity().finish();
                                                 }else{
                                                     dialog.dismiss();

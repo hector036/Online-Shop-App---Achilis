@@ -14,6 +14,7 @@ public class RegisterActivity extends AppCompatActivity {
     public static boolean onResetPasswordFragment = false;
     public static boolean onSignInFragment = false;
     public static boolean onSignUnFragment = false;
+    public static boolean closeBtnDisabled = false;
 
     public static RegisterActivity registerActivity;
 
@@ -33,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if(keyCode == KeyEvent.KEYCODE_BACK){
+            closeBtnDisabled = false;
             if(onResetPasswordFragment){
                 onResetPasswordFragment = false;
                 onSignInFragment = true;

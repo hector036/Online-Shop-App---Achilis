@@ -1,7 +1,9 @@
 package com.example.achilis;
 
 public class WishListModel {
+
     private String productImage;
+    private String productId;
     private String prouctTitle;
     private long freeCoupon;
     private String rating;
@@ -10,7 +12,9 @@ public class WishListModel {
     private String cuttedPrice;
     private boolean COD;
 
-    public WishListModel(String productImage, String prouctTitle, long freeCoupon, String rating, long totalRating, String productPrice, String cuttedPrice, boolean COD) {
+    public WishListModel(String productId,String productImage, String prouctTitle, long freeCoupon, String rating, long totalRating, String productPrice, String cuttedPrice, boolean COD) {
+
+        this.productId = productId;
         this.productImage = productImage;
         this.prouctTitle = prouctTitle;
         this.freeCoupon = freeCoupon;
@@ -19,6 +23,14 @@ public class WishListModel {
         this.productPrice = productPrice;
         this.cuttedPrice = cuttedPrice;
         this.COD = COD;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getProductImage() {

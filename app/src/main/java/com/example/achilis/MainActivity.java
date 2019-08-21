@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser!=null) {
@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }else {
             SystemClock.sleep(3000);
-            Intent loginIntent = new Intent(MainActivity.this,RegisterActivity.class);
-           // Intent loginIntent = new Intent(MainActivity.this,HomeActivity.class);
+            //Intent loginIntent = new Intent(MainActivity.this,RegisterActivity.class);
+            Intent loginIntent = new Intent(MainActivity.this,HomeActivity.class);
             startActivity(loginIntent);
             finish();
         }

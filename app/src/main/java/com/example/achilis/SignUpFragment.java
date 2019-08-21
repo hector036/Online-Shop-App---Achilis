@@ -27,10 +27,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.example.achilis.RegisterActivity.closeBtnDisabled;
@@ -177,33 +180,61 @@ public class SignUpFragment extends Fragment {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
 
-                                                Map<String,Object> list_size = new HashMap<>();
-                                                list_size.put("list_size", (long) 0);
+                                                CollectionReference userDataReference = firebaseFirestore.collection("USERS").document(firebaseAuth.getUid()).collection("USER_DATA");
+
+                                                /////////////maps///////
+                                                Map<String,Object> wishlistMap = new HashMap<>();
+                                                wishlistMap.put("list_size", (long) 0);
 
 
-                                                firebaseFirestore.collection("USERS").document(firebaseAuth.getUid()).collection("USER_DATA").document("MY_WISHLIST")
-                                                        .set(list_size).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                Map<String,Object> ratingsMap = new HashMap<>();
+                                                ratingsMap.put("list_size", (long) 0);
+                                                /////////////maps//////
 
-                                                        if (task.isSuccessful()) {
-                                                            if (closeBtnDisabled) {
-                                                                closeBtnDisabled = false;
+                                                /////////////list//////////
+
+                                                final List<String> documentNames = new ArrayList<>();
+                                                documentNames.add("MY_WISHLIST");
+                                                documentNames.add("MY_RATINGS");
+
+                                                List<Map<String,Object>> documentFields= new ArrayList<>();
+                                                documentFields.add(wishlistMap);
+                                                documentFields.add(ratingsMap);
+                                                /////////////list/////////
+
+                                                for(int x=0; x<documentNames.size();x++){
+                                                    final int finalX = x;
+                                                    userDataReference.document(documentNames.get(x))
+                                                            .set(documentFields.get(x)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                                            if (task.isSuccessful()) {
+
+                                                                if(finalX ==documentNames.size()-1){
+                                                                    if (closeBtnDisabled) {
+                                                                        closeBtnDisabled = false;
+                                                                    } else {
+                                                                        Intent homeIntent = new Intent(getActivity(), HomeActivity.class);
+                                                                        startActivity(homeIntent);
+                                                                    }
+                                                                    getActivity().finish();
+                                                                }
+
+
                                                             } else {
-                                                                Intent homeIntent = new Intent(getActivity(), HomeActivity.class);
-                                                                startActivity(homeIntent);
+                                                                dialog.dismiss();
+                                                                signUpButton.setEnabled(true);
+                                                                signUpButton.setTextColor(Color.rgb(255, 255, 255));
+                                                                String error = task.getException().getMessage();
+                                                                Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+
                                                             }
-                                                            getActivity().finish();
-                                                        } else {
-                                                            dialog.dismiss();
-                                                            signUpButton.setEnabled(true);
-                                                            signUpButton.setTextColor(Color.rgb(255, 255, 255));
-                                                            String error = task.getException().getMessage();
-                                                            Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+
 
                                                         }
-                                                    }
-                                                });
+                                                    });
+                                                }
 
 
                                             } else {

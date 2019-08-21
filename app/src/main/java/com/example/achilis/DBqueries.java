@@ -306,8 +306,9 @@ public class DBqueries {
                         myRatedIds.add(task.getResult().get("product_ID_"+x).toString());
                         myRating.add((long)task.getResult().get("rating_"+x));
 
-                        if(task.getResult().get("product_ID_x"+x).toString().equals(ProductDetailsActivity.productID) && ProductDetailsActivity.rateNaowContainer !=null){
-                            ProductDetailsActivity.setRating(Integer.parseInt(String.valueOf((long)task.getResult().get("rating_"+x)))-1);
+                        if(task.getResult().get("product_ID_"+x).toString().equals(ProductDetailsActivity.productID) && ProductDetailsActivity.rateNaowContainer !=null){
+                            ProductDetailsActivity.initialRating =Integer.parseInt(String.valueOf((long)task.getResult().get("rating_"+x)))-1;
+                            ProductDetailsActivity.setRating(ProductDetailsActivity.initialRating);
                         }
                     }
 

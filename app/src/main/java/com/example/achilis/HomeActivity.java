@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,6 +59,7 @@ public class HomeActivity extends AppCompatActivity
     private ImageView actionBarLogo;
     private Dialog signInDialog;
     public static DrawerLayout drawer;
+    private TextView badgeCount;
 
     private int currentFragement = -1;
 
@@ -71,7 +73,7 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-         drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
 
@@ -91,7 +93,6 @@ public class HomeActivity extends AppCompatActivity
             toggle.syncState();
             setFragment(new HomeFragment(), HOME_FRAGEMENT);
         }
-
 
 
         signInDialog = new Dialog(HomeActivity.this);
@@ -127,6 +128,7 @@ public class HomeActivity extends AppCompatActivity
             navigationView.getMenu().getItem(navigationView.getMenu().size() - 1).setEnabled(true);
 
         }
+        invalidateOptionsMenu();
     }
 
     @Override
@@ -161,6 +163,41 @@ public class HomeActivity extends AppCompatActivity
         if (currentFragement == HOME_FRAGEMENT) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
             getMenuInflater().inflate(R.menu.home, menu);
+            MenuItem cartItem = menu.findItem(R.id.home_cart_icon);
+
+                cartItem.setActionView(R.layout.badge_layout);
+                ImageView badgeIcon = cartItem.getActionView().findViewById(R.id.badge_icon);
+                badgeIcon.setImageResource(R.mipmap.cart);
+                badgeCount = cartItem.getActionView().findViewById(R.id.badge_count);
+
+                if(currentUser!=null){
+                    if (DBqueries.cartList.size() == 0) {
+                        DBqueries.loadCartList(HomeActivity.this, new Dialog(HomeActivity.this), false,badgeCount);
+
+                    }else {
+                            badgeCount.setVisibility(View.VISIBLE);
+
+                        if (DBqueries.cartList.size() < 99) {
+                            badgeCount.setText(String.valueOf(DBqueries.cartList.size()));
+                        } else {
+                            badgeCount.setText("99");
+                        }
+                    }
+                }
+
+                cartItem.getActionView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (currentUser == null) {
+                            signInDialog.show();
+
+                        } else {
+                            goToFragment("My Cart", new MyCartFragment(), CART_FRAGEMENT);
+                        }
+                    }
+                });
+
+
         }
 
         return true;
@@ -175,7 +212,7 @@ public class HomeActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.home_cart_icon) {
-            if (currentUser==null) {
+            if (currentUser == null) {
                 signInDialog.show();
 
             } else {
@@ -191,9 +228,11 @@ public class HomeActivity extends AppCompatActivity
 
             return true;
         } else if (id == android.R.id.home) {
-            showcart = false;
-            finish();
-            return true;
+            if (showcart) {
+                showcart = false;
+                finish();
+                return true;
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -218,7 +257,7 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
-        if(currentUser!=null) {
+        if (currentUser != null) {
             int id = item.getItemId();
 
             if (id == R.id.nav_home) {
@@ -238,11 +277,11 @@ public class HomeActivity extends AppCompatActivity
 
             } else if (id == R.id.nav_signout) {
 
-                    FirebaseAuth.getInstance().signOut();
-                    DBqueries.clearData();
-                    Intent loginIntent = new Intent(HomeActivity.this, RegisterActivity.class);
-                    startActivity(loginIntent);
-                    finish();
+                FirebaseAuth.getInstance().signOut();
+                DBqueries.clearData();
+                Intent loginIntent = new Intent(HomeActivity.this, RegisterActivity.class);
+                startActivity(loginIntent);
+                finish();
 
 
             } else if (id == R.id.nav_myaddressess) {
@@ -257,7 +296,7 @@ public class HomeActivity extends AppCompatActivity
 
             drawer.closeDrawer(GravityCompat.START);
             return true;
-        }else {
+        } else {
             drawer.closeDrawer(GravityCompat.START);
             signInDialog.show();
             return false;

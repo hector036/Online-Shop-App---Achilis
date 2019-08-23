@@ -37,7 +37,7 @@ public class DeliveryActivity extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         List<CartItemModel> cartItemModelList = new ArrayList<>();
 
-        cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,0,0));
+      /*  cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,0,0));
         cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,0,0));
         cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,0,0));
         cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,1,0));
@@ -45,7 +45,7 @@ public class DeliveryActivity extends AppCompatActivity {
         cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,1,1));
         cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,1,1));
         cartItemModelList.add(new CartItemModel(1,"Total (2 items)","Tk. 49999/-","free","Tk. 59999/-","Tk.999/-"));
-
+*/
         CartAdapter cartAdapter = new CartAdapter(cartItemModelList);
         deliveryRecyclerView.setAdapter(cartAdapter);
         cartAdapter.notifyDataSetChanged();

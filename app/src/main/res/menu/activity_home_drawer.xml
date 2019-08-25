@@ -28,7 +28,7 @@
     <item
         android:id="@+id/nav_myaccount"
         android:icon="@mipmap/account_black"
-        android:title="My Account" />
+        android:title="Account" />
 
     <item
         android:id="@+id/nav_setting"

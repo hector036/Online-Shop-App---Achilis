@@ -9,15 +9,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DeliveryActivity extends AppCompatActivity {
 
+    public static List<CartItemModel> cartItemModelList;
     private RecyclerView deliveryRecyclerView;
     private Button changeOrAddAddressBtn;
     public static final int SELECT_ADDRESS=0;
+
+    private TextView totalAmount;
+    private TextView fullName;
+    private TextView fullAddress;
+    private TextView pincode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,20 +40,15 @@ public class DeliveryActivity extends AppCompatActivity {
 
         deliveryRecyclerView = findViewById(R.id.delivery_recyclerview_delivery);
         changeOrAddAddressBtn= findViewById(R.id.change_or_add_address_btn);
+        totalAmount= findViewById(R.id.total_cart_amount);
+        fullName= findViewById(R.id.full_name_order_details);
+        fullAddress= findViewById(R.id.address_order_details);
+        pincode= findViewById(R.id.pincode_order_details);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        List<CartItemModel> cartItemModelList = new ArrayList<>();
 
-      /*  cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,0,0));
-        cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,0,0));
-        cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,0,0));
-        cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,1,0));
-        cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,1,0));
-        cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,1,1));
-        cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,1,1));
-        cartItemModelList.add(new CartItemModel(1,"Total (2 items)","Tk. 49999/-","free","Tk. 59999/-","Tk.999/-"));
-*/
-        CartAdapter cartAdapter = new CartAdapter(cartItemModelList);
+        CartAdapter cartAdapter = new CartAdapter(cartItemModelList,totalAmount,false);
         deliveryRecyclerView.setAdapter(cartAdapter);
         cartAdapter.notifyDataSetChanged();
 
@@ -62,7 +64,21 @@ public class DeliveryActivity extends AppCompatActivity {
                 startActivity(myAddressIntent);
             }
         });
+
+
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        fullName.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getFullName());
+        fullAddress.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getAddress());
+        pincode.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getFullName());
+
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

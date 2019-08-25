@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class MyCartFragment extends Fragment {
 
     private Dialog loadingDialog;
     public static CartAdapter cartAdapter;
-
+    private TextView totalAmount;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -45,7 +46,8 @@ public class MyCartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_cart, container, false);
 
         cartItemRecyclerView = view.findViewById(R.id.cart_item_recycler_view);
-       continueBtn = view.findViewById(R.id.cart_continue_button);
+        continueBtn = view.findViewById(R.id.cart_continue_button);
+        totalAmount = view.findViewById(R.id.total_cart_amount);
 
         //////loading dialog////
         loadingDialog = new Dialog(getContext());
@@ -60,10 +62,17 @@ public class MyCartFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         cartItemRecyclerView.setLayoutManager(layoutManager);
-        if(DBqueries.cartItemModelList.size()==0){
+        if (DBqueries.cartItemModelList.size() == 0) {
             DBqueries.cartList.clear();
-            DBqueries.loadCartList(getContext(),loadingDialog,true,new TextView(getContext()));
-        }else {
+            DBqueries.loadCartList(getContext(), loadingDialog, true, new TextView(getContext()),totalAmount);
+        } else {
+
+            if (DBqueries.cartItemModelList.get(DBqueries.cartItemModelList.size() - 1).getType() == CartItemModel.TOTAL_AMOUNT) {
+                LinearLayout parent = (LinearLayout) totalAmount.getParent().getParent();
+                parent.setVisibility(View.VISIBLE);
+
+            }
+
             loadingDialog.dismiss();
         }
 
@@ -72,19 +81,37 @@ public class MyCartFragment extends Fragment {
        /* List<CartItemModel> cartItemModelList = new ArrayList<>();
         cartItemModelList.add(new CartItemModel(0, R.mipmap.image_5,"Pixel 2 (Black)",2,"Tk. 49999/-","Tk. 59999/-",1,0,0));
 */
-         cartAdapter = new CartAdapter(DBqueries.cartItemModelList);
+        cartAdapter = new CartAdapter(DBqueries.cartItemModelList, totalAmount, true);
         cartItemRecyclerView.setAdapter(cartAdapter);
         cartAdapter.notifyDataSetChanged();
 
 
+        continueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-    continueBtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent deliveryIntent = new Intent(getContext(), AddressActivity.class);
-            getContext().startActivity(deliveryIntent);
-        }
-    });
+                DeliveryActivity.cartItemModelList = new ArrayList<>();
+
+                for (int x = 0; x < DBqueries.cartItemModelList.size(); x++) {
+                    CartItemModel cartItemModel = DBqueries.cartItemModelList.get(x);
+                    if (cartItemModel.isInStock()) {
+                        DeliveryActivity.cartItemModelList.add(cartItemModel);
+                    }
+                }
+                DeliveryActivity.cartItemModelList.add(new CartItemModel(CartItemModel.TOTAL_AMOUNT));
+                loadingDialog.show();
+
+                if (DBqueries.addressesModelList.size()==0) {
+                    DBqueries.loadAddresses(getContext(), loadingDialog);
+                } else {
+
+                        loadingDialog.dismiss();
+                    Intent deliveryIntent = new Intent(getContext(), DeliveryActivity.class);
+                    startActivity(deliveryIntent);
+
+                }
+            }
+        });
 
 
         return view;

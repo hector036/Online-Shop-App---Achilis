@@ -172,6 +172,9 @@ public class SignUpFragment extends Fragment {
 
                             Map<String,Object> userdata = new HashMap<>();
                             userdata.put("firstname", firstName.getText().toString());
+                            userdata.put("lastname", lastName.getText().toString());
+                            userdata.put("email", email.getText().toString());
+                            userdata.put("phone", "");
 
                             firebaseFirestore.collection("USERS").document(firebaseAuth.getUid())
                                     .set(userdata)
@@ -192,6 +195,9 @@ public class SignUpFragment extends Fragment {
 
                                                 Map<String,Object> cartMap = new HashMap<>();
                                                 cartMap.put("list_size", (long) 0);
+
+                                                Map<String,Object> myAdressesMap = new HashMap<>();
+                                                myAdressesMap.put("list_size", (long) 0);
                                                 /////////////maps//////
 
                                                 /////////////list//////////
@@ -200,11 +206,13 @@ public class SignUpFragment extends Fragment {
                                                 documentNames.add("MY_WISHLIST");
                                                 documentNames.add("MY_RATINGS");
                                                 documentNames.add("MY_CART");
+                                                documentNames.add("MY_ADDRESSES");
 
                                                 List<Map<String,Object>> documentFields= new ArrayList<>();
                                                 documentFields.add(wishlistMap);
                                                 documentFields.add(ratingsMap);
                                                 documentFields.add(cartMap);
+                                                documentFields.add(myAdressesMap);
                                                 /////////////list/////////
 
                                                 for(int x=0; x<documentNames.size();x++){

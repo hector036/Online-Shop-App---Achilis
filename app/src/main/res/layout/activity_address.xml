@@ -108,18 +108,18 @@
                     android:inputType="number"
                     android:textColor="@color/color_black" />
 
-                <EditText
-                    android:id="@+id/state_address"
+                <Spinner
+                    android:id="@+id/state_spnner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_weight="1"
-                    android:hint="State"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/color_black" />
+                    android:backgroundTint="@color/recycler_view_bg"
+                    android:background="@drawable/redeem_border_background"
+                    />
 
             </LinearLayout>
 

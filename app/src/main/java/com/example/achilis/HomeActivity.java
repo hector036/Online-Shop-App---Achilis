@@ -171,7 +171,7 @@ public class HomeActivity extends AppCompatActivity
 
             if (currentUser != null) {
                 if (DBqueries.cartList.size() == 0) {
-                    DBqueries.loadCartList(HomeActivity.this, new Dialog(HomeActivity.this), false, badgeCount,new TextView(HomeActivity.this));
+                    DBqueries.loadCartList(HomeActivity.this, new Dialog(HomeActivity.this), false, badgeCount, new TextView(HomeActivity.this));
 
                 } else {
                     badgeCount.setVisibility(View.VISIBLE);
@@ -253,10 +253,11 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
+
+    //****************previous onNavigationItemSelected which contains bugs********************
     @SuppressWarnings("StatementWithEmptyBody")
 
-    MenuItem menuItem;
-
+    /*//MenuItem menuItem;
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -313,6 +314,63 @@ public class HomeActivity extends AppCompatActivity
 
             return true;
         } else {
+            signInDialog.show();
+            return false;
+        }
+
+    }
+*/
+    //****************previous onNavigationItemSelected ********************
+
+    @Override
+
+
+
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
+        if (currentUser != null) {
+            int id = item.getItemId();
+
+            if (id == R.id.nav_home) {
+                // Handle the camera action
+
+                actionBarLogo.setVisibility(View.VISIBLE);
+                invalidateOptionsMenu();
+                setFragment(new HomeFragment(), HOME_FRAGEMENT);
+            } else if (id == R.id.nav_mycart) {
+                goToFragment("My Cart", new MyCartFragment(), CART_FRAGEMENT);
+
+            } else if (id == R.id.nav_mywishlist) {
+                goToFragment("My Wish", new MyWishListFragment(), WISHLIST_FRAGEMENT);
+
+            } else if (id == R.id.nav_myaccount) {
+                goToFragment("My Account", new MyAccountFragment(), ACCOUNT_FRAGEMENT);
+
+            } else if (id == R.id.nav_signout) {
+
+                FirebaseAuth.getInstance().signOut();
+                DBqueries.clearData();
+                Intent loginIntent = new Intent(HomeActivity.this, RegisterActivity.class);
+                startActivity(loginIntent);
+                finish();
+
+
+            } else if (id == R.id.nav_myaddressess) {
+                goToFragment("My Addresses", new MyAddressesTestFragment(), MYADDRESSES_FRAGEMENT);
+
+            } else if (id == R.id.nav_setting) {
+
+            } else if (id == R.id.nav_myorder) {
+                goToFragment("My Order", new MyOrderFragment(), ORDER_FRAGEMENT);
+
+            }
+
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        } else {
+            drawer.closeDrawer(GravityCompat.START);
             signInDialog.show();
             return false;
         }

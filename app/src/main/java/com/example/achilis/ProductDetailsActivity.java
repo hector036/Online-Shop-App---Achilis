@@ -641,9 +641,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         /////dialog
         signInDialog = new Dialog(ProductDetailsActivity.this);
-        signInDialog.setContentView(R.layout.sign_in_dialog);
+        signInDialog.setContentView(R.layout.log_in_dialog_new);
         signInDialog.setCancelable(true);
-        signInDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        signInDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 680);
         Button dialogLogInBtn = signInDialog.findViewById(R.id.login_btn_dialog);
 
         final Intent registerIntent = new Intent(ProductDetailsActivity.this, RegisterActivity.class);

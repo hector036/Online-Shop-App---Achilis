@@ -1,14 +1,9 @@
 package com.example.achilis;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -27,13 +22,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.time.ZoneOffset;
-
-import static com.example.achilis.MyAccountFragment.MANAGE_ADDRESS;
 import static com.example.achilis.RegisterActivity.closeBtnDisabled;
 
 public class HomeActivity extends AppCompatActivity
@@ -64,6 +55,7 @@ public class HomeActivity extends AppCompatActivity
     private int scrollFlags;
     private AppBarLayout.LayoutParams params;
     private int currentFragement = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,10 +92,11 @@ public class HomeActivity extends AppCompatActivity
 
 
         signInDialog = new Dialog(HomeActivity.this);
-        signInDialog.setContentView(R.layout.sign_in_dialog);
+        signInDialog.setContentView(R.layout.log_in_dialog_new);
         signInDialog.setCancelable(true);
-        signInDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        signInDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 680);
         Button dialogLogInBtn = signInDialog.findViewById(R.id.login_btn_dialog);
+
 
         final Intent registerIntent = new Intent(HomeActivity.this, RegisterActivity.class);
 
@@ -344,4 +337,6 @@ public class HomeActivity extends AppCompatActivity
         addressesAdapterFrag.notifyItemChanged(deselect);
         addressesAdapterFrag.notifyItemChanged(select);
     }
+
+
 }

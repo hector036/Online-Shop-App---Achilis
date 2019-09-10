@@ -48,18 +48,36 @@
                 android:tint="@color/colorPrimary"
                 app:srcCompat="@mipmap/addaddress" />
 
-            <EditText
-                android:id="@+id/city-address"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:ems="10"
-                android:hint="City*"
-                android:inputType="textPersonName"
-                android:textColor="@color/color_black" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center_vertical"
+                    android:layout_weight="4"
+                    android:textSize="18sp"
+                    android:text="Area :" />
+
+                <Spinner
+                    android:id="@+id/state_spnner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/redeem_border_background"
+                    android:backgroundTint="@color/recycler_view_bg" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/locality_address"
@@ -67,85 +85,69 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:ems="10"
                 android:gravity="start"
-                android:hint="Locality, area or street*"
+                android:hint="Address*"
                 android:inputType="textMultiLine"
                 android:isScrollContainer="true"
                 android:lines="3"
                 android:textColor="@color/color_black" />
 
-            <EditText
-                android:id="@+id/flat_on_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:ems="10"
-                android:gravity="start"
-                android:hint="Flat no., Building name*"
-                android:inputType="textMultiLine"
-                android:isScrollContainer="true"
-                android:lines="3"
-                android:textColor="@color/color_black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/pincode_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_weight="1"
-                    android:hint="Pincode"
-                    android:inputType="number"
-                    android:textColor="@color/color_black" />
-
-                <Spinner
-                    android:id="@+id/state_spnner"
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/countryCodePicker_address"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/recycler_view_bg"
-                    android:background="@drawable/redeem_border_background"
+
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    app:ccp_autoDetectCountry="true"
+                    app:ccp_contentColor="@color/color_black"
+                    app:ccp_defaultNameCode="BD"
+                    app:ccp_rememberLastSelection="true"
+                    app:ccp_showArrow="false"
+                    app:ccp_showFlag="false"
+                    app:ccp_hintExampleNumber="true"
+                    android:layout_weight="4"
+                    app:ccp_showNameCode="false"
+                    app:ccp_showPhoneCode="true"
+                    android:gravity="center_vertical"
+
                     />
 
+                <EditText
+                    android:id="@+id/mobile_num_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:inputType="phone"
+                    android:singleLine="true"
+                    android:layout_weight="1"
+                    android:hint="Mobile Number*"
+                    android:textColor="@color/color_black"
+                    />
             </LinearLayout>
 
             <EditText
-                android:id="@+id/landmark_address"
+                android:id="@+id/pincode_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:layout_weight="1"
-                android:hint="Landmark(Optional)"
-                android:inputType="textPersonName"
-                android:textColor="@color/color_black" />
-
-            <EditText
-                android:id="@+id/mobile_num_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:layout_weight="1"
-                android:hint="Mobile Number*"
+                android:hint="Pin code (Optional)"
                 android:inputType="number"
                 android:textColor="@color/color_black" />
+
 
             <Button
                 android:id="@+id/save_btn_address"

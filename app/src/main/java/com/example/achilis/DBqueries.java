@@ -40,6 +40,11 @@ public class DBqueries {
     // public static FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
 
+    public static String fullname = "";
+    public static String email = "";
+    public static String mobile = "";
+
+
     public static FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     public static List<CategoryModel> categoryModelList = new ArrayList();
 
@@ -380,7 +385,7 @@ public class DBqueries {
                                             index = cartList.size() - 2;
                                         }
 
-                                        cartItemModelList.add(index, new CartItemModel(CartItemModel.CART_ITEM, productId, task.getResult().get("product_image_1").toString()
+                                        cartItemModelList.add(index,new CartItemModel(CartItemModel.CART_ITEM, productId, task.getResult().get("product_image_1").toString()
                                                 , task.getResult().get("product_title").toString()
                                                 , (long) task.getResult().get("free_coupens")
                                                 , task.getResult().get("product_price").toString()

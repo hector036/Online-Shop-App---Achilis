@@ -306,7 +306,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
 
-                                                        if (DBqueries.cartItemModelList.size() != 0) {
+                                                       if (DBqueries.cartItemModelList.size() != 0) {
 
                                                             DBqueries.cartItemModelList.add(0, new CartItemModel(CartItemModel.CART_ITEM, productID, documentSnapshot.get("product_image_1").toString()
                                                                     , documentSnapshot.get("product_title").toString()
@@ -317,7 +317,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
                                                                     , (long) 0
                                                                     , (long) 0
                                                                     , (boolean) documentSnapshot.get("in_stock")));
-                                                        }
+                                                            System.out.println("Hi iam in");
+                                                       }
 
                                                         isAddedToCart = true;
                                                         DBqueries.cartList.add(productID);

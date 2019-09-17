@@ -96,13 +96,7 @@ public class DeliveryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                for(int x=0;x<cartItemModelList.size();x++){
 
-                    MyOrderFragment.myOrderItemModelList.add(R.mipmap.image_5,cartItemModelList.get(x).getProductTitle(),"",2);
-                }
-
-                Intent loginIntent = new Intent(DeliveryActivity.this,HomeActivity.class);
-                startActivity(loginIntent);
 
             }
         });

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="6dp"
+    android:layout_marginStart="6dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="6dp"
+    android:layout_marginBottom="0dp"
 
-    android:background="@drawable/rounded_back_ground_5_border"
-    android:elevation="8dp">
+    android:background="@drawable/rounded_back_ground_3_border"
+    android:elevation="6dp">
 
     <Button
         android:id="@+id/grid_product_layout_viewall_button"

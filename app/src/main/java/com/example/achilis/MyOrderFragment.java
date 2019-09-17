@@ -25,6 +25,7 @@ public class MyOrderFragment extends Fragment {
     }
 
     private RecyclerView myOrderRecyclerView;
+    public static List<MyOrderItemModel> myOrderItemModelList ;
 
 
     @Override
@@ -39,11 +40,13 @@ public class MyOrderFragment extends Fragment {
         myOrderRecyclerView.setLayoutManager(layoutManager);
 
         List<MyOrderItemModel> myOrderItemModelList = new ArrayList<>();
+/*
 
         myOrderItemModelList.add(new MyOrderItemModel(R.mipmap.image_5,"Pixel 2XL (Black)","Delivered on Mon, 15th Jan 2019",2));
         myOrderItemModelList.add(new MyOrderItemModel(R.mipmap.image_5,"Pixel 2XL (Black)","Delivered on Mon, 15th Jan 2019",2));
         myOrderItemModelList.add(new MyOrderItemModel(R.mipmap.image_5,"Pixel 2XL (Black)","Cancelled",2));
         myOrderItemModelList.add(new MyOrderItemModel(R.mipmap.image_5,"Pixel 2XL (Black)","Delivered on Mon, 15th Jan 2019",-1));
+*/
 
         MyOderAdapter myOderAdapter = new MyOderAdapter(myOrderItemModelList);
         myOrderRecyclerView.setAdapter(myOderAdapter);

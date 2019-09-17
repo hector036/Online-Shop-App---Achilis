@@ -8,221 +8,221 @@
 
     android:background="@color/colorPrimary">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/const_layout_phone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+  <android.support.constraint.ConstraintLayout
+      android:id="@+id/const_layout_phone"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
 
-        <Button
-            android:id="@+id/next_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@color/buttonColor"
-            android:enabled="false"
-            android:text="Next"
-            android:textAllCaps="false"
-            android:textColor="@color/redButtonDisabled"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phone_login_phne_number" />
-
-
-        <com.hbb20.CountryCodePicker
-            android:id="@+id/countryCodePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            app:ccp_autoDetectCountry="true"
-            app:ccp_contentColor="@color/colorAccent"
-            app:ccp_defaultNameCode="BD"
-            app:ccp_rememberLastSelection="true"
-            app:ccp_showArrow="false"
-            app:ccp_showFlag="true"
-            app:ccp_hintExampleNumber="true"
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/buttonColor"
+        android:enabled="false"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@color/redButtonDisabled"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone_login_phne_number" />
 
 
-            app:ccp_showNameCode="false"
-            app:ccp_textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@+id/phone_login_phne_number"
-            app:layout_constraintEnd_toStartOf="@+id/phone_login_phne_number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/phone_login_phne_number" />
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/countryCodePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-        <EditText
-            android:id="@+id/phone_login_phne_number"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:backgroundTint="@color/colorAccent"
-            android:inputType="phone"
-            android:singleLine="true"
-            android:textColor="@color/colorAccent"
-
-            android:textColorHint="@color/colorHint"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <TextView
-            android:id="@+id/textViewPrivacy"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/terms_policy_text_next"
-            android:textAlignment="center"
-            android:textColor="@color/colorAccent"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/next_button"
-            app:layout_constraintVertical_bias="0.977" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="56dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:text="Enter your phone number "
-            android:textColor="@color/colorAccent"
-            android:textSize="21sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        app:ccp_autoDetectCountry="true"
+        app:ccp_contentColor="@color/colorAccent"
+        app:ccp_defaultNameCode="BD"
+        app:ccp_rememberLastSelection="true"
+        app:ccp_showArrow="false"
+        app:ccp_showFlag="true"
+        app:ccp_hintExampleNumber="true"
 
 
-    </android.support.constraint.ConstraintLayout>
+        app:ccp_showNameCode="false"
+        app:ccp_textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/phone_login_phne_number"
+        app:layout_constraintEnd_toStartOf="@+id/phone_login_phne_number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/phone_login_phne_number" />
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/const_layout_otp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+    <EditText
+        android:id="@+id/phone_login_phne_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="@color/colorAccent"
+        android:inputType="phone"
+        android:singleLine="true"
+        android:textColor="@color/colorAccent"
 
-        <com.goodiebag.pinview.Pinview
+        android:textColorHint="@color/colorHint"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-            android:id="@+id/pinview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+    <TextView
+        android:id="@+id/textViewPrivacy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/terms_policy_text_next"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/next_button"
+        app:layout_constraintVertical_bias="0.977" />
 
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/colorPrimary"
-            app:cursorVisible="true"
-
-
-            app:forceKeyboard="false"
-            app:inputType="number"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/varification_phone_field"
-            app:layout_constraintVertical_bias="0.04000002"
-            app:password="false"
-            app:pinBackground="@drawable/background_pin"
-            app:pinHeight="48dp"
-            app:pinLength="6"
-            app:pinWidth="48dp"
-            app:splitWidth="6dp" />
-
-        <TextView
-            android:id="@+id/textViewVarification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="Verification Code"
-            android:textColor="@color/colorAccent"
-            android:textSize="21sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView5Fragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="Please type the verification code sent to"
-            android:textColor="@color/colorAccent"
-
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewVarification" />
-
-        <TextView
-            android:id="@+id/varification_phone_field"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+8801*******00"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView5Fragment"
-            app:layout_constraintStart_toStartOf="@+id/textView5Fragment"
-            app:layout_constraintTop_toBottomOf="@+id/textView5Fragment" />
-
-        <ImageView
-            android:id="@+id/refresh_icon"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_resend_code"
-            app:layout_constraintStart_toEndOf="@+id/tv_resend_code"
-            app:layout_constraintTop_toTopOf="@+id/tv_resend_code"
-            app:srcCompat="@mipmap/resend" />
-
-        <TextView
-            android:id="@+id/tv_resend_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="16dp"
-            android:enabled="false"
-            android:text="Resend Code"
-            android:textColor="@color/colorHint"
-            app:layout_constraintStart_toStartOf="@+id/pinview"
-            app:layout_constraintTop_toBottomOf="@+id/pinview" />
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Enter your phone number "
+        android:textColor="@color/colorAccent"
+        android:textSize="21sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-    </android.support.constraint.ConstraintLayout>
+  </android.support.constraint.ConstraintLayout>
+
+  <android.support.constraint.ConstraintLayout
+      android:id="@+id/const_layout_otp"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="gone">
+
+    <com.goodiebag.pinview.Pinview
+
+        android:id="@+id/pinview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/colorPrimary"
+        app:cursorVisible="true"
+
+
+        app:forceKeyboard="false"
+        app:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/varification_phone_field"
+        app:layout_constraintVertical_bias="0.04000002"
+        app:password="false"
+        app:pinBackground="@drawable/background_pin"
+        app:pinHeight="48dp"
+        app:pinLength="6"
+        app:pinWidth="48dp"
+        app:splitWidth="6dp" />
+
+    <TextView
+        android:id="@+id/textViewVarification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Verification Code"
+        android:textColor="@color/colorAccent"
+        android:textSize="21sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5Fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Please type the verification code sent to"
+        android:textColor="@color/colorAccent"
+
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewVarification" />
+
+    <TextView
+        android:id="@+id/varification_phone_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+8801*******00"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView5Fragment"
+        app:layout_constraintStart_toStartOf="@+id/textView5Fragment"
+        app:layout_constraintTop_toBottomOf="@+id/textView5Fragment" />
+
+    <ImageView
+        android:id="@+id/refresh_icon"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_resend_code"
+        app:layout_constraintStart_toEndOf="@+id/tv_resend_code"
+        app:layout_constraintTop_toTopOf="@+id/tv_resend_code"
+        app:srcCompat="@mipmap/resend" />
+
+    <TextView
+        android:id="@+id/tv_resend_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="16dp"
+        android:enabled="false"
+        android:text="Resend Code"
+        android:textColor="@color/colorHint"
+        app:layout_constraintStart_toStartOf="@+id/pinview"
+        app:layout_constraintTop_toBottomOf="@+id/pinview" />
+
+
+  </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

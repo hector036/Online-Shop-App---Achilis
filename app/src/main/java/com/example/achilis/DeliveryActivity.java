@@ -1,5 +1,6 @@
 package com.example.achilis;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -25,6 +27,9 @@ public class DeliveryActivity extends AppCompatActivity {
     private TextView fullName;
     private TextView fullAddress;
     private TextView pincode;
+    private Button continueBtn;
+    private Dialog loadingDialog;
+    private Dialog paymentDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,28 @@ public class DeliveryActivity extends AppCompatActivity {
         fullName= findViewById(R.id.full_name_order_details);
         fullAddress= findViewById(R.id.address_order_details);
         pincode= findViewById(R.id.pincode_order_details);
+        continueBtn= findViewById(R.id.cart_continue_button);
+
+        //////loading dialog////
+        loadingDialog = new Dialog(DeliveryActivity.this);
+        loadingDialog.setContentView(R.layout.loading_progress_dialog);
+        loadingDialog.setCancelable(false);
+      //  loadingDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.rounded_back_ground));
+        loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        //////loading dialog////
+
+
+        //////payment dialog////
+        loadingDialog = new Dialog(DeliveryActivity.this);
+        loadingDialog.setContentView(R.layout.payment_method);
+        loadingDialog.setCancelable(true);
+        //  loadingDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.rounded_back_ground));
+        loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        //////payment dialog////
+
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -65,6 +92,21 @@ public class DeliveryActivity extends AppCompatActivity {
             }
         });
 
+        continueBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                for(int x=0;x<cartItemModelList.size();x++){
+
+                    MyOrderFragment.myOrderItemModelList.add(R.mipmap.image_5,cartItemModelList.get(x).getProductTitle(),"",2);
+                }
+
+                Intent loginIntent = new Intent(DeliveryActivity.this,HomeActivity.class);
+                startActivity(loginIntent);
+
+            }
+        });
+
 
     }
 
@@ -74,7 +116,7 @@ public class DeliveryActivity extends AppCompatActivity {
 
         fullName.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getFullName());
         fullAddress.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getAddress());
-        pincode.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getFullName());
+        pincode.setText(DBqueries.addressesModelList.get(DBqueries.selectedAddress).getPinCode());
 
 
     }
